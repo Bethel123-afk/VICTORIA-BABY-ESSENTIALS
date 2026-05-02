@@ -102,6 +102,34 @@ const DashboardOrders: React.FC = () => {
                        </div>
                     </div>
 
+                    {/* History Items with Options */}
+                    <div style={{ marginBottom: '25px' }}>
+                       <h5 style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '1px' }}>Manifest Items</h5>
+                       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                          {order.orderItems && order.orderItems.map((item, index) => (
+                             <div key={index} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--gray-50)', padding: '15px', borderRadius: '8px', border: '1px solid var(--gray-100)', flexWrap: 'wrap', gap: '15px' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                   <div style={{ width: '50px', height: '50px', borderRadius: '6px', overflow: 'hidden', background: 'var(--white)', border: '1px solid var(--gray-200)', flexShrink: 0 }}>
+                                      <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                   </div>
+                                   <div>
+                                      <p style={{ margin: '0 0 4px 0', fontSize: '0.95rem', fontWeight: 600, color: 'var(--primary)' }}>{item.name}</p>
+                                      <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>Qty: {item.qty} × ₦{item.price.toLocaleString()}</p>
+                                   </div>
+                                </div>
+                                <div style={{ display: 'flex', gap: '10px' }}>
+                                   <Link to={`/product/${item.product}`} className="btn btn-secondary compact" style={{ padding: '8px 15px', fontSize: '0.7rem', display: 'flex', alignItems: 'center' }}>
+                                      <i className="fas fa-eye" style={{ marginRight: '5px' }}></i> View
+                                   </Link>
+                                   <Link to={`/product/${item.product}`} className="btn btn-primary compact" style={{ padding: '8px 15px', fontSize: '0.7rem', display: 'flex', alignItems: 'center' }}>
+                                      <i className="fas fa-sync-alt" style={{ marginRight: '5px' }}></i> Reorder
+                                   </Link>
+                                </div>
+                             </div>
+                          ))}
+                       </div>
+                    </div>
+
                     <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px'}}>
                        <div style={{display: 'flex', gap: '12px'}}>
                           <div style={{
