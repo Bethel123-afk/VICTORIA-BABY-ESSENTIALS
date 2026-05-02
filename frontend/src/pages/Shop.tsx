@@ -196,23 +196,27 @@ const Shop: React.FC = () => {
                         {filteredProducts.map((item, idx) => (
                             <div className={`item-card-premium reveal-anim stagger-${(idx % 3) + 1}`} key={item._id}>
                                 <div className="img-wrapper">
-                                    <PremiumImage src={item.image} alt={item.name} className="product-image" />
+                                    <Link to={`/product/${item._id}`} style={{ display: 'block' }}>
+                                        <PremiumImage src={item.image} alt={item.name} className="product-image" />
+                                    </Link>
                                     <button className="add-to-wishlist" onClick={() => addToWishlist(item)}>
                                         <i className={isInWishlist(item._id) ? "fas fa-heart" : "far fa-heart"} style={isInWishlist(item._id) ? { color: 'var(--heart)' } : {}}></i>
                                     </button>
-                                    <div className="quick-action">
-                                        <button className="btn-acquire-compact" onClick={() => addToCart(item)}>PROCURE</button>
-                                    </div>
                                     {item.countInStock === 0 && (
                                         <div className="stock-badge">DEPLETED</div>
                                     )}
                                 </div>
                                 <div className="item-meta">
-                                    <span className="category-label">{item.category}</span>
-                                    <h4 className="item-title">{item.name}</h4>
-                                    <div className="item-footer">
-                                        <p className="item-price">₦{item.price.toLocaleString()}</p>
-                                        <Link to={`/product/${item._id}`} className="view-detail-link">VIEW</Link>
+                                    <Link to={`/product/${item._id}`} style={{ textDecoration: 'none' }}>
+                                        <span className="category-label">{item.category}</span>
+                                        <h4 className="item-title jumia-title">{item.name}</h4>
+                                        <div className="price-container">
+                                            <p className="item-price jumia-price">₦{item.price.toLocaleString()}</p>
+                                        </div>
+                                    </Link>
+                                    <div className="jumia-action-footer">
+                                        <button className="btn-jumia-add" onClick={() => addToCart(item)}>ADD TO CART</button>
+                                        <Link to={`/product/${item._id}`} className="btn-jumia-view">VIEW ITEM</Link>
                                     </div>
                                 </div>
                             </div>
