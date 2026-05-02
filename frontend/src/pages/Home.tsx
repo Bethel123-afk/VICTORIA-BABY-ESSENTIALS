@@ -72,11 +72,11 @@ const Home: React.FC = () => {
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.1))', zIndex: 1 }}></div>
         <PremiumImage src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=2000&q=80" alt="Boutique Atmosphere" style={{ width: '100%', height: '100%', position: 'absolute' }} />
         
-        <div className="container" style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', alignItems: 'center' }}>
-          <div className="hero-text reveal-anim" style={{ maxWidth: '700px', color: 'white' }}>
-            <span className="item-badge stagger-1" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.1)' }}>NEONATAL EXCELLENCE</span>
-            <h1 className="stagger-2" style={{ color: 'white', fontSize: '5rem', marginBottom: '30px' }}>Curated for <br /><span style={{ color: 'var(--secondary)' }}>New Life</span></h1>
-            <p className="stagger-3" style={{ fontSize: '1.2rem', opacity: 0.9, lineHeight: 1.8, marginBottom: '40px' }}>
+        <div className="container hero-container">
+          <div className="hero-text reveal-anim">
+            <span className="item-badge stagger-1 hero-badge">NEONATAL EXCELLENCE</span>
+            <h1 className="stagger-2 hero-title">Curated for <br /><span className="hero-accent">New Life</span></h1>
+            <p className="stagger-3 hero-description">
               A master-class collection of baby essentials, scientifically vetted and aesthetically refined for the discerning parent.
             </p>
             <div className="hero-actions stagger-4" style={{ display: 'flex', gap: '20px' }}>
@@ -87,19 +87,19 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="stats-strip no-print" style={{ background: 'var(--primary)', color: 'white', padding: '40px 0' }}>
-         <div className="container" style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
-            <div style={{ textAlign: 'center' }}>
-               <strong style={{ fontSize: '2rem', display: 'block', color: 'var(--secondary)' }}>25,000+</strong>
-               <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6 }}>Mothers Served</span>
+      <section className="stats-strip no-print">
+         <div className="container stats-container">
+            <div className="stat-item">
+               <strong className="stat-number">25,000+</strong>
+               <span className="stat-label">Mothers Served</span>
             </div>
-            <div style={{ textAlign: 'center' }}>
-               <strong style={{ fontSize: '2rem', display: 'block', color: 'var(--secondary)' }}>98%</strong>
-               <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6 }}>Satisfaction Protocol</span>
+            <div className="stat-item">
+               <strong className="stat-number">98%</strong>
+               <span className="stat-label">Satisfaction Protocol</span>
             </div>
-            <div style={{ textAlign: 'center' }}>
-               <strong style={{ fontSize: '2rem', display: 'block', color: 'var(--secondary)' }}>100%</strong>
-               <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6 }}>Neonatal Safe</span>
+            <div className="stat-item">
+               <strong className="stat-number">100%</strong>
+               <span className="stat-label">Neonatal Safe</span>
             </div>
          </div>
       </section>
@@ -126,15 +126,15 @@ const Home: React.FC = () => {
 
             {quizStep === 1 && (
               <div className="quiz-step active reveal-anim" data-step="1">
-                <h3 style={{ textAlign: 'center', fontSize: '1.8rem', fontFamily: 'Playfair Display, serif', marginBottom: '40px' }}>Identity Status?</h3>
-                <div className="quiz-options" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(1, 'new-mom')} style={{ padding: '40px', background: 'var(--gray-100)', border: 'none', borderRadius: '8px', cursor: 'pointer', transition: '0.3s' }}>
-                    <i className="fas fa-star-of-life" style={{ fontSize: '2rem', marginBottom: '15px', color: 'var(--secondary)' }}></i>
-                    <span style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem' }}>NEONATAL FIRST JOURNEY</span>
+                <h3 className="quiz-question">Identity Status?</h3>
+                <div className="quiz-options-grid">
+                  <button className="quiz-opt" onClick={() => handleQuizAnswer(1, 'new-mom')}>
+                    <i className="fas fa-star-of-life"></i>
+                    <span>NEONATAL FIRST JOURNEY</span>
                   </button>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(1, 'pro-mom')} style={{ padding: '40px', background: 'var(--gray-100)', border: 'none', borderRadius: '8px', cursor: 'pointer', transition: '0.3s' }}>
-                    <i className="fas fa-award" style={{ fontSize: '2rem', marginBottom: '15px', color: 'var(--secondary)' }}></i>
-                    <span style={{ display: 'block', fontWeight: 600, fontSize: '0.9rem' }}>EXPERIENCED MATRIARCH</span>
+                  <button className="quiz-opt" onClick={() => handleQuizAnswer(1, 'pro-mom')}>
+                    <i className="fas fa-award"></i>
+                    <span>EXPERIENCED MATRIARCH</span>
                   </button>
                 </div>
               </div>
@@ -208,7 +208,7 @@ const Home: React.FC = () => {
             <p style={{ color: 'var(--text-muted)' }}>Curated configurations for every logistical requirement.</p>
           </div>
 
-          <div className="package-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
+          <div className="package-grid">
             {/* Standard Package */}
             <div className={`package-card reveal-anim stagger-1 ${targetPackage === 'Standard' ? 'highlight' : ''}`} style={{ background: 'white', padding: '40px', border: '1px solid var(--gray-100)', borderRadius: '8px', transition: '0.4s' }}>
               <span className="item-badge" style={{ fontSize: '0.6rem' }}>Daily Essentials</span>
@@ -257,31 +257,31 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="about reveal-anim" id="about" style={{ padding: '120px 0', background: 'var(--primary)', color: 'white' }}>
+      <section className="about-section reveal-anim" id="about">
         <div className="container">
-          <div className="about-flex" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
-            <div className="about-text stagger-1">
-              <span className="item-badge" style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}>OUR PHILOSOPHY</span>
-              <h2 className="legacy-title" style={{ color: 'white', fontSize: '4rem', fontFamily: 'Playfair Display, serif', margin: '20px 0' }}>
-                Integrity in <br /><span style={{ color: 'var(--secondary)' }}>Every Fiber</span>
+          <div className="about-grid">
+            <div className="about-text-content stagger-1">
+              <span className="item-badge about-badge">OUR PHILOSOPHY</span>
+              <h2 className="legacy-title">
+                Integrity in <br /><span>Every Fiber</span>
               </h2>
-              <p style={{ fontSize: '1.1rem', lineHeight: 2, marginBottom: '40px', color: 'rgba(255,255,255,0.7)', fontStyle: 'italic' }}>
+              <p className="about-quote">
                 "We do not merely sell products; we authorize peace of mind for the transition into parenthood."
               </p>
-              <div className="philosophy-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
-                <div className="philo-card" style={{ background: 'rgba(255,255,255,0.05)', padding: '30px', borderRadius: '4px' }}>
-                  <i className="fas fa-shield-virus" style={{ color: 'var(--secondary)', fontSize: '1.5rem', marginBottom: '20px' }}></i>
-                  <h4 style={{ fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'white' }}>Clinical Vetting</h4>
-                  <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>Every inventory unit undergoes a rigorous 12-point integrity check.</p>
+              <div className="philosophy-grid">
+                <div className="philo-card">
+                  <i className="fas fa-shield-virus"></i>
+                  <h4>Clinical Vetting</h4>
+                  <p>Every inventory unit undergoes a rigorous 12-point integrity check.</p>
                 </div>
-                <div className="philo-card" style={{ background: 'rgba(255,255,255,0.05)', padding: '30px', borderRadius: '4px' }}>
-                  <i className="fas fa-hand-holding-heart" style={{ color: 'var(--secondary)', fontSize: '1.5rem', marginBottom: '20px' }}></i>
-                  <h4 style={{ fontSize: '0.8rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'white' }}>Neonatal Softness</h4>
-                  <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>Materials selected for zero-friction interaction with newborn skin.</p>
+                <div className="philo-card">
+                  <i className="fas fa-hand-holding-heart"></i>
+                  <h4>Neonatal Softness</h4>
+                  <p>Materials selected for zero-friction interaction with newborn skin.</p>
                 </div>
               </div>
             </div>
-            <div className="about-image stagger-3" style={{ height: '600px', borderRadius: '8px', overflow: 'hidden' }}>
+            <div className="about-image-container stagger-3">
               <PremiumImage
                 src="https://images.unsplash.com/photo-1510735148003-8818f8e02931?auto=format&fit=crop&w=1200&q=80"
                 alt="Our Philosophy"

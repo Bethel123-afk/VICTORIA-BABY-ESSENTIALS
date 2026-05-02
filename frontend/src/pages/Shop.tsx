@@ -71,44 +71,33 @@ const Shop: React.FC = () => {
 
   return (
     <main style={{ background: '#fafafa', minHeight: '100vh' }}>
-      <section className="shop-hero" style={{ height: '40vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', background: 'var(--primary)' }}>
+      <section className="shop-hero">
         <PremiumImage src="https://images.unsplash.com/photo-1544126592-807daa2b5652?auto=format&fit=crop&w=2000&q=80" alt="Atelier Setting" style={{ width: '100%', height: '100%', position: 'absolute', opacity: 0.4 }} />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-            <div className="reveal-anim">
-                <span className="item-badge stagger-1" style={{ color: 'white', borderColor: 'rgba(255,255,255,0.3)' }}>CATALOGUE D'EXCELLENCE</span>
-                <h1 className="stagger-2" style={{ color: 'white', fontSize: '3.5rem', fontFamily: 'Playfair Display, serif' }}>Bespoke <span>Inventory</span></h1>
+            <div className="reveal-anim shop-hero-text">
+                <span className="item-badge stagger-1 shop-hero-badge">CATALOGUE D'EXCELLENCE</span>
+                <h1 className="stagger-2 shop-hero-title">Bespoke <span>Inventory</span></h1>
             </div>
         </div>
       </section>
 
-      <section className="shop-content" style={{ marginTop: '-40px', position: 'relative', zIndex: 5, paddingBottom: '120px' }}>
+      <section className="shop-content">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '50px', alignItems: 'start' }}>
+          <div className="shop-layout">
             
             {/* Advanced Diagnostic Sidebar */}
-            <aside className="reveal-anim" style={{ position: 'sticky', top: '120px' }}>
-                <div style={{ background: 'white', padding: '35px', borderRadius: '12px', boxShadow: '0 20px 40px rgba(0,0,0,0.03)', border: '1px solid var(--gray-100)' }}>
-                    <h3 style={{ fontSize: '0.75rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '30px', borderBottom: '1px solid var(--gray-100)', paddingBottom: '15px' }}>Diagnostic Filters</h3>
+            <aside className="reveal-anim shop-sidebar">
+                <div className="filter-card">
+                    <h3 className="filter-title">Diagnostic Filters</h3>
                     
-                    <div style={{ marginBottom: '40px' }}>
-                        <label style={{ display: 'block', fontSize: '0.6rem', letterSpacing: '1px', color: 'var(--text-muted)', marginBottom: '15px' }}>CATEGORY REGISTRY</label>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    <div className="filter-group">
+                        <label className="filter-label">CATEGORY REGISTRY</label>
+                        <div className="filter-options">
                             {['all', 'Essential', 'Collection', 'Feeding', 'Skincare'].map(cat => (
                                 <button 
                                     key={cat}
                                     onClick={() => setFilter(cat)}
-                                    style={{ 
-                                        textAlign: 'left', 
-                                        padding: '10px 15px', 
-                                        fontSize: '0.75rem', 
-                                        background: filter === cat ? 'var(--gray-100)' : 'transparent',
-                                        border: 'none',
-                                        borderRadius: '4px',
-                                        color: filter === cat ? 'var(--primary)' : 'var(--text-muted)',
-                                        cursor: 'pointer',
-                                        fontWeight: filter === cat ? 700 : 400,
-                                        transition: '0.3s'
-                                    }}
+                                    className={`filter-option-btn ${filter === cat ? 'active' : ''}`}
                                 >
                                     {cat.toUpperCase()}
                                 </button>
@@ -116,8 +105,8 @@ const Shop: React.FC = () => {
                         </div>
                     </div>
 
-                    <div style={{ marginBottom: '40px' }}>
-                        <label style={{ display: 'block', fontSize: '0.6rem', letterSpacing: '1px', color: 'var(--text-muted)', marginBottom: '20px' }}>VALUATION RANGE (₦)</label>
+                    <div className="filter-group">
+                        <label className="filter-label">VALUATION RANGE (₦)</label>
                         <input 
                             type="range" 
                             min="0" 
@@ -125,30 +114,28 @@ const Shop: React.FC = () => {
                             step="5000"
                             value={maxPrice}
                             onChange={(e) => setMaxPrice(parseInt(e.target.value))}
-                            style={{ width: '100%', accentColor: 'var(--secondary)', marginBottom: '15px' }}
+                            className="price-range"
                         />
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', fontWeight: 700 }}>
+                        <div className="price-display">
                             <span>₦0</span>
-                            <span style={{ color: 'var(--secondary)' }}>₦{maxPrice.toLocaleString()}</span>
+                            <span className="current-price">₦{maxPrice.toLocaleString()}</span>
                         </div>
                     </div>
 
-                    <div style={{ marginBottom: '40px' }}>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 600 }}>
+                    <div className="filter-group">
+                        <label className="stock-filter">
                             <input 
                                 type="checkbox" 
                                 checked={inStockOnly}
                                 onChange={(e) => setInStockOnly(e.target.checked)}
-                                style={{ width: '18px', height: '18px', accentColor: 'var(--secondary)' }}
                             />
                             AVAILABLE IN REGISTRY
                         </label>
                     </div>
 
                     <button 
-                        className="btn btn-secondary" 
+                        className="btn btn-secondary reset-btn" 
                         onClick={() => {setFilter('all'); setMaxPrice(250000); setInStockOnly(false); setSearchTerm('');}}
-                        style={{ width: '100%', padding: '15px', fontSize: '0.65rem', letterSpacing: '2px' }}
                     >
                         RESET PROTOCOL
                     </button>
@@ -156,26 +143,26 @@ const Shop: React.FC = () => {
             </aside>
 
             {/* Product Feed */}
-            <div>
-                <div className="glass-panel" style={{ padding: '25px 35px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', boxShadow: '0 20px 40px rgba(0,0,0,0.03)', background: 'white' }}>
-                    <div style={{ position: 'relative', flex: 1, maxWidth: '400px' }}>
+            <div className="product-feed-container">
+                <div className="shop-controls glass-panel">
+                    <div className="search-box-wrapper">
                         <input 
                             type="text" 
                             placeholder="SEARCH INVENTORY..." 
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            style={{ width: '100%', padding: '12px 40px 12px 0', border: 'none', borderBottom: '1px solid var(--gray-100)', fontSize: '0.8rem', letterSpacing: '1px', outline: 'none' }}
+                            className="shop-search-input"
                         />
-                        <i className="fas fa-search" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', opacity: 0.2 }}></i>
+                        <i className="fas fa-search"></i>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                        <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', letterSpacing: '1px' }}>{filteredProducts.length} UNITS IDENTIFIED</span>
-                        <div style={{ width: '1px', height: '20px', background: 'var(--gray-200)' }}></div>
+                    <div className="shop-meta-controls">
+                        <span className="units-count">{filteredProducts.length} UNITS IDENTIFIED</span>
+                        <div className="divider"></div>
                         <select 
                             value={sortBy} 
                             onChange={(e) => setSortBy(e.target.value)}
-                            style={{ border: 'none', background: 'transparent', fontFamily: 'inherit', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', cursor: 'pointer', outline: 'none' }}
+                            className="sort-select"
                         >
                             <option value="newest">LATEST ARRIVAL</option>
                             <option value="price-asc">VALUATION: LOW-HIGH</option>
@@ -185,13 +172,13 @@ const Shop: React.FC = () => {
                 </div>
 
                 {loading ? (
-                    <div className="items-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px' }}>
+                    <div className="items-grid">
                         {[1, 2, 3, 4, 5, 6].map(i => (
-                            <div key={i} style={{ background: 'white', padding: '20px', borderRadius: '12px', border: '1px solid var(--gray-100)' }}>
+                            <div key={i} className="skeleton-card">
                                 <Skeleton width="100%" height="280px" borderRadius="8px" marginBottom="20px" />
                                 <Skeleton width="40%" height="10px" marginBottom="15px" />
                                 <Skeleton width="80%" height="20px" marginBottom="15px" />
-                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <div className="skeleton-footer">
                                     <Skeleton width="30%" height="20px" />
                                     <Skeleton width="20%" height="15px" />
                                 </div>
@@ -205,27 +192,27 @@ const Shop: React.FC = () => {
                         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Adjust your diagnostic parameters to broaden the search.</p>
                     </div>
                 ) : (
-                    <div className="items-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '30px' }}>
+                    <div className="items-grid">
                         {filteredProducts.map((item, idx) => (
-                            <div className={`item-card-premium reveal-anim stagger-${(idx % 3) + 1}`} key={item._id} style={{ background: 'white', border: '1px solid var(--gray-100)', borderRadius: '12px', overflow: 'hidden', position: 'relative' }}>
-                                <div className="img-wrapper" style={{ height: '320px', overflow: 'hidden', background: '#f9f9f9', position: 'relative' }}>
+                            <div className={`item-card-premium reveal-anim stagger-${(idx % 3) + 1}`} key={item._id}>
+                                <div className="img-wrapper">
                                     <PremiumImage src={item.image} alt={item.name} className="product-image" />
-                                    <button className="add-to-wishlist" onClick={() => addToWishlist(item)} style={{ position: 'absolute', top: '15px', right: '15px', background: 'white', border: 'none', width: '38px', height: '38px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(0,0,0,0.05)', cursor: 'pointer', zIndex: 10 }}>
-                                        <i className={isInWishlist(item._id) ? "fas fa-heart" : "far fa-heart"} style={isInWishlist(item._id) ? { color: 'var(--heart)' } : { fontSize: '0.9rem' }}></i>
+                                    <button className="add-to-wishlist" onClick={() => addToWishlist(item)}>
+                                        <i className={isInWishlist(item._id) ? "fas fa-heart" : "far fa-heart"} style={isInWishlist(item._id) ? { color: 'var(--heart)' } : {}}></i>
                                     </button>
-                                    <div className="quick-action" style={{ position: 'absolute', bottom: '20px', left: '20px', right: '20px', transform: 'translateY(20px)', opacity: 0, transition: '0.4s cubic-bezier(0.16, 1, 0.3, 1)', zIndex: 10 }}>
-                                        <button className="btn btn-primary" onClick={() => addToCart(item)} style={{ width: '100%', padding: '15px', fontSize: '0.65rem', letterSpacing: '2px' }}>INITIATE PROCUREMENT</button>
+                                    <div className="quick-action">
+                                        <button className="btn btn-primary" onClick={() => addToCart(item)}>INITIATE PROCUREMENT</button>
                                     </div>
                                     {item.countInStock === 0 && (
-                                        <div style={{ position: 'absolute', top: '15px', left: '15px', background: 'var(--primary)', color: 'white', padding: '5px 12px', fontSize: '0.6rem', fontWeight: 700, borderRadius: '2px', letterSpacing: '1px' }}>DEPLETED</div>
+                                        <div className="stock-badge">DEPLETED</div>
                                     )}
                                 </div>
-                                <div className="item-meta" style={{ padding: '25px' }}>
-                                    <span style={{ fontSize: '0.55rem', opacity: 0.5, letterSpacing: '1.5px', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>{item.category}</span>
-                                    <h4 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.2rem', marginBottom: '15px', lineHeight: 1.3 }}>{item.name}</h4>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <p style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--primary)', margin: 0 }}>₦{item.price.toLocaleString()}</p>
-                                        <Link to={`/product/${item._id}`} style={{ fontSize: '0.65rem', color: 'var(--secondary)', textDecoration: 'none', fontWeight: 700, letterSpacing: '1px' }}>DIAGNOSTICS</Link>
+                                <div className="item-meta">
+                                    <span className="category-label">{item.category}</span>
+                                    <h4 className="item-title">{item.name}</h4>
+                                    <div className="item-footer">
+                                        <p className="item-price">₦{item.price.toLocaleString()}</p>
+                                        <Link to={`/product/${item._id}`} className="view-detail-link">DIAGNOSTICS</Link>
                                     </div>
                                 </div>
                             </div>
