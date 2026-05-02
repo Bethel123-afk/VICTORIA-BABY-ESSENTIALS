@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 # Victoria Baby Essentials 👶✨
 
 Victoria Baby Essentials is a premium e-commerce platform dedicated to providing high-quality baby products. Built with the MERN stack (MongoDB, Express, React, Node.js), it offers a seamless shopping experience with a focus on aesthetics, security, and performance.
 
 ## 🚀 Features
+=======
+# Victoria Baby Essentials 
+
+Victoria Baby Essentials is a premium e-commerce platform dedicated to providing high-quality baby products. Built with the MERN stack (MongoDB, Express, React, Node.js), it offers a seamless shopping experience with a focus on aesthetics, security, and performance.
+
+## Features
+>>>>>>> 022cb1fc0616673a60295422727c927201c7eb6d
 
 - **User Authentication**: Secure signup and login using JWT and Bcrypt hashing.
 - **Product Management**: Browse through a curated collection of baby essentials with detailed descriptions and high-quality images.
@@ -22,13 +30,21 @@ Victoria Baby Essentials is a premium e-commerce platform dedicated to providing
 - **Payments**: Flutterwave API.
 - **File Uploads**: Multer.
 
+<<<<<<< HEAD
 ## 📋 Prerequisites
+=======
+##  Prerequisites
+>>>>>>> 022cb1fc0616673a60295422727c927201c7eb6d
 
 - Node.js (v16+)
 - MongoDB (Local or Atlas)
 - Flutterwave API Keys
 
+<<<<<<< HEAD
 ## ⚙️ Installation & Setup
+=======
+##  Installation & Setup
+>>>>>>> 022cb1fc0616673a60295422727c927201c7eb6d
 
 1. **Clone the repository**:
    ```bash
@@ -74,7 +90,11 @@ Victoria Baby Essentials is a premium e-commerce platform dedicated to providing
    npm run dev
    ```
 
+<<<<<<< HEAD
 ## 📜 Scripts
+=======
+##  Scripts
+>>>>>>> 022cb1fc0616673a60295422727c927201c7eb6d
 
 - `npm run dev`: Starts both frontend and backend in development mode.
 - `npm run server`: Starts the backend server only.
