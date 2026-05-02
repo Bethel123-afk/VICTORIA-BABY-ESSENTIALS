@@ -47,67 +47,60 @@ const Auth: React.FC = () => {
   };
 
   return (
-    <main className="container auth-main-container" style={{paddingTop: '160px', paddingBottom: '100px'}}>
-      <div className="auth-container reveal-anim stagger-1" id="auth-box">
-        <div className="auth-header" style={{ textAlign: 'center', marginBottom: '50px' }}>
+    <main className="container auth-main-container">
+      <div className="auth-box reveal-anim stagger-1">
+        <div className="auth-header">
           <span className="item-badge">{mode === 'login' ? 'Login' : 'Register'}</span>
-          <h1 id="auth-title" style={{ fontSize: '3rem', marginBottom: '10px' }}>
+          <h1 className="premium-title">
             {mode === 'login' ? 'Welcome Back' : 'Create Account'}
           </h1>
-          <p id="auth-subtitle" style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>
+          <p className="auth-subtitle">
             {mode === 'login' ? 'Enter your email and password.' : 'Fill in the details to register.'}
           </p>
         </div>
 
-        <form onSubmit={submitHandler} className="checkout-card reveal-anim stagger-2"
-          style={{ padding: '40px', border: '1px solid var(--gray-200)', background: 'var(--white)' }}>
+        <form onSubmit={submitHandler} className="auth-form-card reveal-anim stagger-2">
           
-          {error && <div style={{ color: 'red', marginBottom: '20px', textAlign: 'center', backgroundColor: '#ffe6e6', padding: '10px', borderRadius: '5px' }}>{error}</div>}
+          {error && <div className="error-banner">{error}</div>}
 
           {mode === 'register' && (
-            <div className="form-group" style={{ marginBottom: '25px' }}>
-              <label style={{ display: 'block', marginBottom: '10px', textTransform: 'uppercase', fontSize: '0.7rem', letterSpacing: '2px', fontWeight: 700 }}>
-                Full Name
-              </label>
+            <div className="form-group">
+              <label className="form-label">Full Name</label>
               <input type="text" placeholder="Your full name" required={mode==='register'}
                 value={name} onChange={(e) => setName(e.target.value)}
-                style={{ width: '100%', padding: '15px', border: '1px solid var(--gray-200)', fontFamily: 'inherit' }} />
+                className="form-input" />
             </div>
           )}
 
-          <div className="form-group" style={{ marginBottom: '25px' }}>
-            <label style={{ display: 'block', marginBottom: '10px', textTransform: 'uppercase', fontSize: '0.7rem', letterSpacing: '2px', fontWeight: 700 }}>
-              Email Address
-            </label>
+          <div className="form-group">
+            <label className="form-label">Email Address</label>
             <input type="email" placeholder="your@email.com" required
               value={email} onChange={(e) => setEmail(e.target.value)}
-              style={{ width: '100%', padding: '15px', border: '1px solid var(--gray-200)', fontFamily: 'inherit' }} />
+              className="form-input" />
           </div>
 
-          <div className="form-group" style={{ marginBottom: '5px' }}>
-            <label style={{ display: 'block', marginBottom: '10px', textTransform: 'uppercase', fontSize: '0.7rem', letterSpacing: '2px', fontWeight: 700 }}>
-              Password
-            </label>
+          <div className="form-group">
+            <label className="form-label">Password</label>
             <input type="password" placeholder="••••••••" required
                value={password} onChange={(e) => setPassword(e.target.value)}
-              style={{ width: '100%', padding: '15px', border: '1px solid var(--gray-200)', fontFamily: 'inherit' }} />
+               className="form-input" />
           </div>
           
-          <div style={{ textAlign: 'right', margin: '15px 0 30px' }} id="forgot-link-container">
+          <div className="form-actions-secondary">
             {mode === 'login' && (
-              <Link to="/forgotpassword" id="forgot-pass-link" style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textDecoration: 'none' }}>
+              <Link to="/forgotpassword" class="forgot-link">
                 Forgot Password?
               </Link>
             )}
           </div>
 
-          <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%', marginBottom: '20px' }}>
+          <button type="submit" className="btn btn-primary submit-btn" disabled={loading}>
             {loading ? <i className="fas fa-spinner fa-spin"></i> : (mode === 'login' ? 'Login' : 'Register')}
           </button>
 
-          <p style={{ textAlign: 'center', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+          <p className="auth-switch">
             <span>{mode === 'login' ? 'Need an account? ' : 'Already have an account? '}</span>
-            <a href="#" onClick={toggleMode} style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+            <a href="#" onClick={toggleMode} className="switch-link">
               {mode === 'login' ? 'Create an account' : 'Sign in here'}
             </a>
           </p>

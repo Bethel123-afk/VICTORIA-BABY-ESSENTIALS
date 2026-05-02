@@ -79,9 +79,9 @@ const Home: React.FC = () => {
             <p className="stagger-3 hero-description">
               A master-class collection of baby essentials, scientifically vetted and aesthetically refined for the discerning parent.
             </p>
-            <div className="hero-actions stagger-4" style={{ display: 'flex', gap: '20px' }}>
-              <Link to="/shop" className="btn btn-primary" style={{ padding: '20px 40px', letterSpacing: '2px' }}>ACCESS STOREFRONT</Link>
-              <a href="#packages" className="btn btn-secondary" style={{ padding: '20px 40px', color: 'white', border: '1px solid white', letterSpacing: '2px' }}>DISCOVER KITS</a>
+            <div className="hero-actions stagger-4">
+              <Link to="/shop" className="btn btn-primary hero-btn">ACCESS STOREFRONT</Link>
+              <a href="#packages" className="btn btn-secondary hero-btn secondary">DISCOVER KITS</a>
             </div>
           </div>
         </div>
@@ -104,23 +104,23 @@ const Home: React.FC = () => {
          </div>
       </section>
 
-      <section className="quiz-section reveal-anim" id="quiz" style={{ padding: '120px 0', background: '#fcfcfc' }}>
+      <section className="quiz-section reveal-anim" id="quiz">
         <div className="container">
-          <div className="section-title" style={{ textAlign: 'center', marginBottom: '80px' }}>
+          <div className="section-header-centered">
             <span className="item-badge">PERSONALIZED CURATION</span>
-            <h2 style={{ fontSize: '3rem', fontFamily: 'Playfair Display, serif' }}>Match Your Journey</h2>
-            <p style={{ color: 'var(--text-muted)' }}>Identify the ideal essential configuration for your transition into motherhood.</p>
+            <h2 className="section-title">Match Your Journey</h2>
+            <p className="section-desc">Identify the ideal essential configuration for your transition into motherhood.</p>
           </div>
 
-          <div className="quiz-container glass-panel" id="quiz-box" style={{ maxWidth: '800px', margin: '0 auto', padding: '60px', borderRadius: '12px', border: '1px solid var(--gray-100)', boxShadow: '0 40px 100px rgba(0,0,0,0.03)' }}>
+          <div className="quiz-container reveal-anim" id="quiz-box">
             {quizStep === 0 && (
-              <div className="quiz-intro" style={{ textAlign: 'center' }}>
-                <i className="fas fa-microscope" style={{ fontSize: '3rem', color: 'var(--secondary)', marginBottom: '30px', opacity: 0.8 }}></i>
-                <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2.2rem', marginBottom: '20px' }}>Diagnostic Protocol</h3>
-                <p style={{ color: 'var(--text-muted)', marginBottom: '40px', maxWidth: '500px', margin: '0 auto 40px', lineHeight: 1.8 }}>
+              <div className="quiz-intro">
+                <i className="fas fa-microscope"></i>
+                <h3 className="quiz-title">Diagnostic Protocol</h3>
+                <p className="quiz-desc">
                   Our proprietary selection engine synchronizes your current needs with our clinical-grade inventory.
                 </p>
-                <button className="btn btn-primary" style={{ padding: '18px 50px', letterSpacing: '2px' }} onClick={handleStartQuiz}>INITIATE SELECTION</button>
+                <button className="btn btn-primary start-quiz-btn" onClick={handleStartQuiz}>INITIATE SELECTION</button>
               </div>
             )}
 
@@ -142,15 +142,15 @@ const Home: React.FC = () => {
 
             {quizStep === 2 && (
               <div className="quiz-step active reveal-anim" data-step="2">
-                <h3 style={{ textAlign: 'center', fontSize: '1.8rem', fontFamily: 'Playfair Display, serif', marginBottom: '40px' }}>Preparation Phase?</h3>
-                <div className="quiz-options" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(2, 'early')} style={{ padding: '40px', background: 'var(--gray-100)', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>
-                    <i className="fas fa-compass" style={{ fontSize: '2rem', marginBottom: '15px', color: 'var(--secondary)' }}></i>
-                    <span style={{ display: 'block', fontWeight: 600 }}>EARLY PROCUREMENT</span>
+                <h3 className="quiz-question">Preparation Phase?</h3>
+                <div className="quiz-options-grid">
+                  <button className="quiz-opt" onClick={() => handleQuizAnswer(2, 'early')}>
+                    <i className="fas fa-compass"></i>
+                    <span>EARLY PROCUREMENT</span>
                   </button>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(2, 'late')} style={{ padding: '40px', background: 'var(--gray-100)', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>
-                    <i className="fas fa-hourglass-half" style={{ fontSize: '2rem', marginBottom: '15px', color: 'var(--secondary)' }}></i>
-                    <span style={{ display: 'block', fontWeight: 600 }}>IMMINENT DISPATCH</span>
+                  <button className="quiz-opt" onClick={() => handleQuizAnswer(2, 'late')}>
+                    <i className="fas fa-clock"></i>
+                    <span>IMMEDIATE ARRIVAL</span>
                   </button>
                 </div>
               </div>
