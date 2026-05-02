@@ -201,7 +201,7 @@ const Shop: React.FC = () => {
                                         <i className={isInWishlist(item._id) ? "fas fa-heart" : "far fa-heart"} style={isInWishlist(item._id) ? { color: 'var(--heart)' } : {}}></i>
                                     </button>
                                     <div className="quick-action">
-                                        <button className="btn btn-primary" onClick={() => addToCart(item)}>INITIATE PROCUREMENT</button>
+                                        <button className="btn-acquire-compact" onClick={() => addToCart(item)}>PROCURE</button>
                                     </div>
                                     {item.countInStock === 0 && (
                                         <div className="stock-badge">DEPLETED</div>
@@ -212,7 +212,7 @@ const Shop: React.FC = () => {
                                     <h4 className="item-title">{item.name}</h4>
                                     <div className="item-footer">
                                         <p className="item-price">₦{item.price.toLocaleString()}</p>
-                                        <Link to={`/product/${item._id}`} className="view-detail-link">DIAGNOSTICS</Link>
+                                        <Link to={`/product/${item._id}`} className="view-detail-link">VIEW</Link>
                                     </div>
                                 </div>
                             </div>

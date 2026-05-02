@@ -11,12 +11,18 @@ const Auth: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { login } = useAuth();
+  const { userInfo, login } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const redirect = searchParams.get('redirect') || '/';
+
+  React.useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, userInfo, redirect]);
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -88,7 +94,7 @@ const Auth: React.FC = () => {
           
           <div className="form-actions-secondary">
             {mode === 'login' && (
-              <Link to="/forgotpassword" class="forgot-link">
+              <Link to="/forgotpassword" className="forgot-link">
                 Forgot Password?
               </Link>
             )}
