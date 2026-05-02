@@ -27,6 +27,27 @@
     box-sizing: border-box;
 }
 
+/* Global: all typed/input text must be visible black */
+input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+textarea,
+select {
+    color: #1A1A1A;
+    font-family: 'Outfit', sans-serif;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #999999;
+    opacity: 1;
+}
+
+
 body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--background);
