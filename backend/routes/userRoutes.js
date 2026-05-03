@@ -103,8 +103,9 @@ router.post('/forgotpassword', async (req, res) => {
 
   await user.save({ validateBeforeSave: false });
 
-  // Create reset url
-  const resetUrl = `${req.protocol}://${req.get('host')}/resetpassword/${resetToken}`;
+  // Create reset url - must point to frontend, not backend API
+  const frontendUrl = process.env.FRONTEND_URL || req.headers.origin || `${req.protocol}://${req.get('host')}`;
+  const resetUrl = `${frontendUrl}/resetpassword/${resetToken}`;
 
   try {
     await sendEmail({
