@@ -19,6 +19,8 @@ import DashboardProfile from './pages/DashboardProfile';
 import AdminDashboard from './pages/AdminDashboard';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
 
 interface LayoutProps {
   children: ReactNode;
@@ -48,20 +50,31 @@ const App: React.FC = () => {
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/login" element={<Auth />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order/:id" element={<OrderDetails />} />
-          <Route path="/order/success/:id" element={<OrderSuccess />} />
+          <Route path="/checkout" element={<ProtectedRoute />}>
+            <Route index element={<Checkout />} />
+          </Route>
+          <Route path="/order/:id" element={<ProtectedRoute />}>
+            <Route index element={<OrderDetails />} />
+          </Route>
+          <Route path="/order/success/:id" element={<ProtectedRoute />}>
+            <Route index element={<OrderSuccess />} />
+          </Route>
+          
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword/:resettoken" element={<ResetPassword />} />
           
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<DashboardHome />} />
-            <Route path="orders" element={<DashboardOrders />} />
-            <Route path="wishlist" element={<DashboardWishlist />} />
-            <Route path="profile" element={<DashboardProfile />} />
+          <Route path="/dashboard" element={<ProtectedRoute />}>
+            <Route element={<DashboardLayout />}>
+              <Route index element={<DashboardHome />} />
+              <Route path="orders" element={<DashboardOrders />} />
+              <Route path="wishlist" element={<DashboardWishlist />} />
+              <Route path="profile" element={<DashboardProfile />} />
+            </Route>
           </Route>
           
-          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin" element={<AdminRoute />}>
+            <Route index element={<AdminDashboard />} />
+          </Route>
         </Routes>
       </Layout>
     </Router>

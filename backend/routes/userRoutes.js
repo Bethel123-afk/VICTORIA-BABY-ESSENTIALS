@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const { protect } = require('../middleware/authMiddleware');
+const { protect, admin } = require('../middleware/authMiddleware');
 const generateToken = require('../utils/generateToken');
 
 // @desc    Get user profile
@@ -162,13 +162,9 @@ router.put('/resetpassword/:resettoken', async (req, res) => {
 // @desc    Get all users
 // @route   GET /api/users
 // @access  Private/Admin
-router.get('/', protect, async (req, res) => {
-  if (req.user && req.user.isAdmin) {
-    const users = await User.find({});
-    res.json(users);
-  } else {
-    res.status(401).json({ message: 'Not authorized as an admin' });
-  }
+router.get('/', protect, admin, async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
 });
 
 module.exports = router;
