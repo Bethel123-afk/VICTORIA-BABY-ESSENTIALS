@@ -5058,18 +5058,21 @@ h4,
     color: var(--text-main) !important;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin-bottom: 8px !important;
     line-height: 1.3 !important;
-    min-height: 2.6em; /* Keeps height consistent */
+    min-height: 2.6em;
+    /* Keeps height consistent */
 }
 
 /* Bold prominent price like Jumia */
 .jumia-price {
     font-size: 1.1rem !important;
     font-weight: 700 !important;
-    color: var(--text-main) !important; /* Jumia often uses black or dark grey for prices */
+    color: var(--text-main) !important;
+    /* Jumia often uses black or dark grey for prices */
     margin-bottom: 15px !important;
 }
 
@@ -5085,7 +5088,8 @@ h4,
     display: block;
     width: 100%;
     padding: 10px;
-    background: #F68B1E; /* Jumia Orange */
+    background: #F68B1E;
+    /* Jumia Orange */
     color: white;
     border: none;
     font-size: 0.75rem;
@@ -5094,7 +5098,7 @@ h4,
     border-radius: 4px;
     cursor: pointer;
     transition: background 0.2s;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-jumia-add:hover {
@@ -5127,11 +5131,148 @@ h4,
     .jumia-title {
         font-size: 0.75rem !important;
     }
+
     .jumia-price {
         font-size: 0.95rem !important;
     }
-    .btn-jumia-add, .btn-jumia-view {
+
+    .btn-jumia-add,
+    .btn-jumia-view {
         padding: 8px;
         font-size: 0.65rem;
     }
 }
+
+/* =====================================================
+   DASHBOARD MOBILE RESPONSIVENESS
+   ===================================================== */
+.mobile-only.sidebar-toggle-btn {
+    display: none !important;
+}
+
+@media (max-width: 992px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .dashboard-aside {
+        transform: translateX(-100%);
+        width: 280px;
+        padding-top: 100px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+
+    .dashboard-aside.active {
+        transform: translateX(0);
+    }
+
+    .dashboard-content {
+        margin-left: 0;
+        padding: 140px 20px 60px;
+    }
+
+    .mobile-only.sidebar-toggle-btn {
+        display: flex !important;
+    }
+
+    .stats-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card-premium, .stat-card-premium {
+        padding: 20px;
+    }
+
+    .content-header h1 {
+        font-size: 2rem !important;
+    }
+}
+
+/* =====================================================
+   ADMIN DASHBOARD RESPONSIVENESS
+   ===================================================== */
+.admin-container {
+    background-color: #fcfcfc;
+    min-height: 100vh;
+    display: flex;
+}
+
+.admin-aside {
+    width: 300px;
+    background: var(--primary);
+    color: white;
+    position: fixed;
+    height: 100vh;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.admin-content {
+    margin-left: 300px;
+    padding: 60px;
+    width: calc(100% - 300px);
+}
+
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.admin-charts-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 1200px) {
+    .admin-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .admin-charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .admin-container {
+        flex-direction: column;
+    }
+
+    .admin-aside {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 30px 0;
+    }
+
+    .admin-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 20px;
+    }
+
+    .admin-search {
+        width: 100%;
+    }
+
+    .admin-title {
+        font-size: 2.2rem !important;
+    }
+    
+    .admin-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

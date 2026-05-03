@@ -250,9 +250,9 @@ const AdminDashboard: React.FC = () => {
     const lowStockCount = products.filter(p => p.countInStock < 5).length;
 
     return (
-        <div style={{ backgroundColor: '#fcfcfc', minHeight: '100vh', display: 'flex' }}>
+        <div className="admin-container">
             {/* Sidebar */}
-            <div style={{ width: '300px', background: 'var(--primary)', color: 'white', position: 'fixed', height: '100%', padding: '50px 0', display: 'flex', flexDirection: 'column' }}>
+            <div className="admin-aside">
                 <div style={{ padding: '0 40px', marginBottom: '60px' }}>
                     <h2 style={{ fontSize: '1.2rem', letterSpacing: '4px', margin: 0, fontWeight: 300 }}>VICTORIA</h2>
                     <span style={{ fontSize: '0.6rem', color: 'var(--secondary)', letterSpacing: '4px', fontWeight: 700, textTransform: 'uppercase' }}>Command Center</span>
@@ -297,18 +297,18 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div style={{ marginLeft: '300px', padding: '60px', width: 'calc(100% - 300px)' }}>
-                <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px' }}>
+            <div className="admin-content">
+                <header className="admin-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px' }}>
                     <div>
                         <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '3px' }}>Administrative Console</span>
-                        <h1 style={{ fontSize: '3rem', margin: '10px 0 0 0', fontFamily: 'Playfair Display, serif' }}>
+                        <h1 className="admin-title" style={{ fontSize: '3rem', margin: '10px 0 0 0', fontFamily: 'Playfair Display, serif' }}>
                             {activeTab === 'orders' ? 'Operations Log' : activeTab === 'products' ? 'Master Registry' : 'Client Identity Database'}
                         </h1>
                     </div>
-                    <div style={{ display: 'flex', gap: '20px' }}>
-                        <div style={{ position: 'relative' }}>
+                    <div style={{ display: 'flex', gap: '20px' }} className="admin-search">
+                        <div style={{ position: 'relative', width: '100%' }}>
                             <i className="fas fa-search" style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', fontSize: '0.8rem' }}></i>
-                            <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Query records..." style={{ padding: '15px 15px 15px 50px', borderRadius: '4px', border: '1px solid var(--gray-200)', width: '350px', background: 'white', fontSize: '0.85rem' }} />
+                            <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Query records..." style={{ padding: '15px 15px 15px 50px', borderRadius: '4px', border: '1px solid var(--gray-200)', width: '100%', minWidth: '200px', background: 'white', fontSize: '0.85rem' }} />
                         </div>
                     </div>
                 </header>
@@ -324,7 +324,7 @@ const AdminDashboard: React.FC = () => {
                     <>
                         {activeTab === 'orders' && (
                             <div className="reveal-anim">
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '60px' }}>
+                                <div className="admin-stats-grid">
                                     <div className="profile-card-premium" style={{ background: 'white', padding: '30px', borderRadius: '8px', border: '1px solid var(--gray-100)' }}>
                                         <span style={{ fontSize: '0.55rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '2px', display: 'block', marginBottom: '10px' }}>Aggregate Revenue</span>
                                         <h2 style={{ fontSize: '1.8rem', margin: 0, fontWeight: 700 }}>₦{totalRevenue.toLocaleString()}</h2>
@@ -343,7 +343,7 @@ const AdminDashboard: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '30px', marginBottom: '60px' }}>
+                                <div className="admin-charts-grid">
                                     {/* Analytics Chart */}
                                     <div style={{ background: 'white', padding: '40px', borderRadius: '8px', border: '1px solid var(--gray-100)', boxShadow: '0 20px 40px rgba(0,0,0,0.02)' }}>
                                         <h3 style={{ marginBottom: '30px', fontFamily: 'Playfair Display, serif', fontSize: '1.3rem' }}>Revenue Temporality</h3>
@@ -395,7 +395,7 @@ const AdminDashboard: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <div className="table-container" style={{ background: 'white', borderRadius: '8px', border: '1px solid var(--gray-100)', overflow: 'hidden' }}>
+                                <div className="table-container" style={{ background: 'white', borderRadius: '8px', border: '1px solid var(--gray-100)', overflowX: 'auto' }}>
                                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                         <thead>
                                             <tr style={{ borderBottom: '1px solid var(--gray-100)' }}>
@@ -444,7 +444,7 @@ const AdminDashboard: React.FC = () => {
                                     <h3 style={{ fontSize: '1.3rem', fontFamily: 'Playfair Display, serif' }}>Registry Count: {products.length} Units</h3>
                                     <button className="btn btn-primary" onClick={() => openEditModal()}>+ INTEGRATE NEW ASSET</button>
                                 </div>
-                                <div className="table-container" style={{ background: 'white', borderRadius: '8px', border: '1px solid var(--gray-100)', overflow: 'hidden' }}>
+                                <div className="table-container" style={{ background: 'white', borderRadius: '8px', border: '1px solid var(--gray-100)', overflowX: 'auto' }}>
                                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                         <thead>
                                             <tr style={{ borderBottom: '1px solid var(--gray-100)' }}>
@@ -486,7 +486,7 @@ const AdminDashboard: React.FC = () => {
                         {activeTab === 'users' && (
                             <div className="reveal-anim">
                                 <h3 style={{ fontSize: '1.3rem', fontFamily: 'Playfair Display, serif', marginBottom: '40px' }}>Client Database: {users.length} Identities</h3>
-                                <div className="table-container" style={{ background: 'white', borderRadius: '8px', border: '1px solid var(--gray-100)', overflow: 'hidden' }}>
+                                <div className="table-container" style={{ background: 'white', borderRadius: '8px', border: '1px solid var(--gray-100)', overflowX: 'auto' }}>
                                     <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                         <thead>
                                             <tr style={{ borderBottom: '1px solid var(--gray-100)' }}>
