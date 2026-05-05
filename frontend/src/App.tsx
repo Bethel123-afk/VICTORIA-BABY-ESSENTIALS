@@ -19,6 +19,7 @@ import DashboardProfile from './pages/DashboardProfile';
 import AdminDashboard from './pages/AdminDashboard';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import AuthGate from './components/AuthGate';
@@ -79,6 +80,8 @@ const App: React.FC = () => {
           <Route path="/admin" element={<AdminRoute />}>
             <Route index element={<AdminDashboard />} />
           </Route>
+
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
       </Layout>
     </Router>

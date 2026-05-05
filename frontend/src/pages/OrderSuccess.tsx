@@ -46,7 +46,7 @@ const OrderSuccess: React.FC = () => {
                 </div>
 
                 <p className="success-support">
-                    Need immediate assistance? <Link to="/contact" className="support-link">Contact Logistics Support</Link>
+                    Need immediate assistance? <a href="mailto:support@victoriababy.com" className="support-link">Contact Logistics Support</a>
                 </p>
             </div>
         </main>

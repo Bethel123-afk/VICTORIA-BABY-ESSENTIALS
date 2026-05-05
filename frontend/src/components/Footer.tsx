@@ -31,15 +31,16 @@ const Footer: React.FC = () => {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/shop">Shop</Link></li>
-              <li><a href="#about">About Us</a></li>
+              <li><Link to="/#about">About Us</Link></li>
+              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
             </ul>
           </div>
           <div className="footer-links">
             <h4>Customer Care</h4>
             <ul>
-              <li><a href="#shipping"><i className="fas fa-truck" style={{marginRight: '8px', fontSize: '0.9em', color: 'var(--secondary)'}}></i>Shipping & Delivery</a></li>
-              <li><a href="#returns"><i className="fas fa-undo" style={{marginRight: '8px', fontSize: '0.9em', color: 'var(--secondary)'}}></i>Returns Policy</a></li>
-              <li><a href="#faq"><i className="fas fa-question-circle" style={{marginRight: '8px', fontSize: '0.9em', color: 'var(--secondary)'}}></i>FAQs</a></li>
+              <li><Link to="/#shipping"><i className="fas fa-truck" style={{marginRight: '8px', fontSize: '0.9em', color: 'var(--secondary)'}}></i>Shipping & Delivery</Link></li>
+              <li><Link to="/#returns"><i className="fas fa-undo" style={{marginRight: '8px', fontSize: '0.9em', color: 'var(--secondary)'}}></i>Returns Policy</Link></li>
+              <li><Link to="/#faq"><i className="fas fa-question-circle" style={{marginRight: '8px', fontSize: '0.9em', color: 'var(--secondary)'}}></i>FAQs</Link></li>
               <li><a href="mailto:support@victoriababy.com"><i className="fas fa-envelope" style={{marginRight: '8px', fontSize: '0.9em', color: 'var(--secondary)'}}></i>Contact Us</a></li>
             </ul>
           </div>
