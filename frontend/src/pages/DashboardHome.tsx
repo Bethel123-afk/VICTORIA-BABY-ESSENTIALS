@@ -63,7 +63,34 @@ const DashboardHome: React.FC = () => {
          </div>
       </div>
 
-      <div className="recent-activity reveal-anim stagger-2" style={{ background: 'var(--white)', padding: '50px', borderRadius: '8px', border: '1px solid var(--gray-100)', boxShadow: '0 20px 40px rgba(0,0,0,0.02)' }}>
+      <div className="recent-activity reveal-anim stagger-2" style={{ background: 'var(--white)', padding: '50px', borderRadius: '8px', border: '1px solid var(--gray-100)', boxShadow: '0 20px 40px rgba(0,0,0,0.02)', marginBottom: '40px' }}>
+         <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', marginBottom: '40px', borderBottom: '1px solid var(--gray-100)', paddingBottom: '20px' }}>Recent Manifests</h3>
+         {orders.length === 0 ? (
+             <p style={{ color: 'var(--text-muted)' }}>No recent procurements found. <Link to="/shop" style={{ color: 'var(--primary)', textDecoration: 'underline' }}>Explore catalogue</Link></p>
+         ) : (
+             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                 {orders.slice(0, 3).map((order: any) => (
+                     <div key={order._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px', border: '1px solid var(--gray-100)', borderRadius: '8px', flexWrap: 'wrap', gap: '15px' }}>
+                         <div>
+                             <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '5px' }}>{new Date(order.createdAt).toLocaleDateString()}</span>
+                             <strong style={{ fontFamily: 'monospace', color: 'var(--primary)' }}>#{order._id.substring(0, 8).toUpperCase()}</strong>
+                         </div>
+                         <div>
+                             <span style={{ padding: '5px 12px', background: order.isPaid ? 'rgba(142, 151, 117, 0.1)' : 'rgba(231, 76, 60, 0.1)', color: order.isPaid ? 'var(--secondary)' : 'var(--heart)', borderRadius: '50px', fontSize: '0.7rem', fontWeight: 'bold' }}>
+                                 {order.isPaid ? 'Paid' : 'Unpaid'}
+                             </span>
+                         </div>
+                         <div style={{ fontWeight: 'bold', color: 'var(--primary)' }}>
+                             ₦{order.totalPrice.toLocaleString()}
+                         </div>
+                         <Link to={`/order/${order._id}`} className="btn btn-secondary compact" style={{ padding: '8px 15px', fontSize: '0.7rem' }}>View</Link>
+                     </div>
+                 ))}
+             </div>
+         )}
+      </div>
+
+      <div className="recent-activity reveal-anim stagger-3" style={{ background: 'var(--white)', padding: '50px', borderRadius: '8px', border: '1px solid var(--gray-100)', boxShadow: '0 20px 40px rgba(0,0,0,0.02)' }}>
          <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', marginBottom: '40px', borderBottom: '1px solid var(--gray-100)', paddingBottom: '20px' }}>Expedited Protocol</h3>
          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
             <Link to="/dashboard/orders" className="btn btn-secondary compact" style={{ textAlign: 'center', padding: '18px' }}>Inspect Manifests</Link>
