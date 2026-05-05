@@ -1596,10 +1596,20 @@ h4,
     }
 
     .btn {
+        width: 100%;
         padding: 18px 35px;
         font-size: 0.75rem;
-        width: 100%;
         margin-left: 0 !important;
+    }
+
+    .header-actions {
+        gap: 12px !important;
+    }
+
+    .cart-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
     }
 
     .hero-btns {

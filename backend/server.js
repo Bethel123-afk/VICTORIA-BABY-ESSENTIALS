@@ -37,15 +37,11 @@ app.use('/uploads', express.static(uploadsPath));
 
 // Static Assets & Production Routing
 if (process.env.NODE_ENV === 'production') {
-  const distPath = path.resolve(__dirname, '..', 'frontend', 'dist');
+  const distPath = path.join(process.cwd(), 'frontend', 'dist');
   app.use(express.static(distPath));
 
-  app.use((req, res, next) => {
-    if (!req.originalUrl.startsWith('/api')) {
-      res.sendFile(path.resolve(distPath, 'index.html'));
-    } else {
-      next();
-    }
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(distPath, 'index.html'));
   });
 } else {
   app.get('/', (req, res) => {

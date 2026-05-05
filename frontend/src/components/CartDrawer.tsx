@@ -14,7 +14,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
 
     const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
 
-    if (!isOpen) return null;
 
     return (
         <div className={`cart-drawer-overlay ${isOpen ? 'active' : ''}`} onClick={onClose}>
