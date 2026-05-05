@@ -327,7 +327,7 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Premium Onesie */}
+            {/* Organic Set */}
             <div className="package-card reveal-anim stagger-3">
               <div className="package-image-container">
                 <PremiumImage src="https://images.unsplash.com/photo-1555032339-da9ea1603099?auto=format&fit=crop&w=1000&q=80" alt="Premium Collection" />
@@ -340,6 +340,75 @@ const Home: React.FC = () => {
                   <div className="package-price">₦15,000</div>
                   <div className="package-btns">
                     <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'onesie-set', name: 'Premium Onesie Set', price: 15000, category: 'Clothing', image: 'https://images.unsplash.com/photo-1555032339-da9ea1603099?auto=format&fit=crop&w=1000&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                    <Link to="/shop" className="btn-details-minimal" title="View Specifications">
+                        <i className="fas fa-arrow-right"></i>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Neonatal Care Kit */}
+            <div className="package-card reveal-anim stagger-4">
+              <div className="package-image-container">
+                <PremiumImage src="https://images.unsplash.com/photo-1510735148003-8818f8e02931?auto=format&fit=crop&w=1000&q=80" alt="Care Kit" />
+                <span className="package-tag">Medical Care</span>
+              </div>
+              <div className="package-content">
+                <h3 className="package-name">Neonatal Care Kit</h3>
+                <p className="package-snippet">Clinical supplies for primary health monitoring.</p>
+                <div className="package-footer">
+                  <div className="package-price">₦25,000</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'care-kit', name: 'Neonatal Care Kit', price: 25000, category: 'Health', image: 'https://images.unsplash.com/photo-1510735148003-8818f8e02931?auto=format&fit=crop&w=1000&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                    <Link to="/shop" className="btn-details-minimal" title="View Specifications">
+                        <i className="fas fa-arrow-right"></i>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Hygiene Suite */}
+            <div className="package-card reveal-anim stagger-5">
+              <div className="package-image-container">
+                <PremiumImage src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1000&q=80" alt="Hygiene Suite" />
+                <span className="package-tag">Hygiene</span>
+              </div>
+              <div className="package-content">
+                <h3 className="package-name">Hygiene Suite</h3>
+                <p className="package-snippet">Antiseptic and biological care for newborns.</p>
+                <div className="package-footer">
+                  <div className="package-price">₦12,000</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'hygiene-suite', name: 'Hygiene Suite', price: 12000, category: 'Skincare', image: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1000&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                    <Link to="/shop" className="btn-details-minimal" title="View Specifications">
+                        <i className="fas fa-arrow-right"></i>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Health Monitor */}
+            <div className="package-card reveal-anim stagger-6">
+              <div className="package-image-container">
+                <PremiumImage src="https://images.unsplash.com/photo-1576402187878-974f70c890a5?auto=format&fit=crop&w=1000&q=80" alt="Health Monitor" />
+                <span className="package-tag">Observation</span>
+              </div>
+              <div className="package-content">
+                <h3 className="package-name">Health Monitor</h3>
+                <p className="package-snippet">Precision observation tools for safety.</p>
+                <div className="package-footer">
+                  <div className="package-price">₦18,500</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'health-mon', name: 'Health Monitor', price: 18500, category: 'Health', image: 'https://images.unsplash.com/photo-1576402187878-974f70c890a5?auto=format&fit=crop&w=1000&q=80' })} title="Add to Bag">
                         <i className="fas fa-plus"></i>
                     </button>
                     <Link to="/shop" className="btn-details-minimal" title="View Specifications">
@@ -449,6 +518,25 @@ const Home: React.FC = () => {
                   <div className="package-price" style={{ fontSize: '1rem' }}>₦6,500</div>
                   <div className="package-btns">
                     <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'swaddle', name: 'Muslin Swaddle Set (x3)', price: 6500, category: 'Essential', image: 'https://images.unsplash.com/photo-1604176427245-df2f5458931b?auto=format&fit=crop&w=800&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="package-card reveal-anim stagger-6">
+              <div className="package-image-container" style={{ height: '200px' }}>
+                <PremiumImage src="https://images.unsplash.com/photo-1627993434193-de5a42f56636?auto=format&fit=crop&w=800&q=80" alt="Sterilizer" />
+                <span className="package-tag">Hygiene</span>
+              </div>
+              <div className="package-content" style={{ padding: '20px' }}>
+                <h3 className="package-name" style={{ fontSize: '1.2rem' }}>UV Sterilizer & Dryer</h3>
+                <p className="package-snippet" style={{ fontSize: '0.8rem' }}>Eliminates 99.9% of neonatal germs.</p>
+                <div className="package-footer" style={{ paddingTop: '15px' }}>
+                  <div className="package-price" style={{ fontSize: '1rem' }}>₦25,000</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'sterilizer', name: 'UV Sterilizer & Dryer', price: 25000, category: 'Feeding', image: 'https://images.unsplash.com/photo-1627993434193-de5a42f56636?auto=format&fit=crop&w=800&q=80' })} title="Add to Bag">
                         <i className="fas fa-plus"></i>
                     </button>
                   </div>
