@@ -2,6 +2,8 @@
 
 Victoria Baby Essentials is a premium e-commerce platform dedicated to providing high-quality baby products. Built with the MERN stack (MongoDB, Express, React, Node.js), it offers a seamless shopping experience with a focus on aesthetics, security, and performance.
 
+**Live Site:** [victoria-baby-essentials.up.railway.app](https://victoria-baby-essentials.up.railway.app) (Update with your specific Railway URL)
+
 ## 🚀 Features
 
 - **User Authentication**: Secure signup and login using JWT and Bcrypt hashing.
@@ -82,6 +84,23 @@ Victoria Baby Essentials is a premium e-commerce platform dedicated to providing
 - `npm run build`: Builds the production bundle.
 - `npm run data:import`: Imports sample data into MongoDB.
 - `npm run data:destroy`: Clears the database.
+
+## 🚀 Deployment (Railway)
+
+This platform is optimized for deployment on **Railway**.
+
+### Steps to Deploy:
+1.  **Create a New Project** on Railway.
+2.  **Connect your GitHub Repository**.
+3.  **Configure Environment Variables**: Add all variables from your `.env` (MONGO_URI, JWT_SECRET, etc.) in the Railway "Variables" tab.
+4.  **Root Build Command**: The project uses a root-level `package.json` to manage both frontend and backend. Ensure the build command is set to:
+    ```bash
+    npm run build
+    ```
+5.  **Start Command**:
+    ```bash
+    npm start
+    ```
 
 ## 📄 License
 
