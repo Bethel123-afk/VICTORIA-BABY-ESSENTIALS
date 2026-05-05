@@ -68,7 +68,8 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
                             <span className="value">₦{subtotal.toLocaleString()}</span>
                         </div>
                         <p className="footer-note">Shipping and taxes calculated at checkout.</p>
-                        <button onClick={() => { onClose(); navigate('/checkout'); }} className="btn btn-primary checkout-btn">Checkout Now</button>
+                        <button onClick={() => { onClose(); navigate('/checkout'); }} className="btn btn-primary checkout-btn" style={{ width: '100%', marginBottom: '10px' }}>Checkout Now</button>
+                        <button onClick={onClose} className="btn btn-secondary checkout-btn" style={{ width: '100%', background: 'var(--white)', color: 'var(--primary)', border: '1px solid var(--gray-200)' }}>Continue Shopping</button>
                     </div>
                 )}
             </div>
