@@ -24,12 +24,12 @@ const Home: React.FC = () => {
         if (step < 3) {
             setTimeout(() => {
                 setQuizStep(step + 1);
-            }, 400);
+            }, 600);
         } else {
             setQuizStep(4); // Calculating
             setTimeout(() => {
                 calculateResult(newAnswers);
-            }, 1500);
+            }, 2000); // Slightly longer for more "simulated processing" feel
         }
     };
 
@@ -101,6 +101,10 @@ const Home: React.FC = () => {
                <strong className="stat-number">100%</strong>
                <span className="stat-label">Neonatal Safe</span>
             </div>
+            <div className="stat-item">
+               <strong className="stat-number">24/7</strong>
+               <span className="stat-label">Expert Support</span>
+            </div>
          </div>
       </section>
 
@@ -115,7 +119,9 @@ const Home: React.FC = () => {
           <div className="quiz-container reveal-anim" id="quiz-box">
             {quizStep === 0 && (
               <div className="quiz-intro">
-                <i className="fas fa-microscope"></i>
+                <div className="quiz-icon-wrapper">
+                    <i className="fas fa-microscope"></i>
+                </div>
                 <h3 className="quiz-title">Diagnostic Protocol</h3>
                 <p className="quiz-desc">
                   Our proprietary selection engine synchronizes your current needs with our clinical-grade inventory.
@@ -158,46 +164,80 @@ const Home: React.FC = () => {
 
             {quizStep === 3 && (
               <div className="quiz-step active reveal-anim" data-step="3">
-                <h3 style={{ textAlign: 'center', fontSize: '1.8rem', fontFamily: 'Playfair Display, serif', marginBottom: '40px' }}>Strategic Scope?</h3>
-                <div className="quiz-options" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '20px' }}>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(3, 'basics')} style={{ padding: '40px', background: 'var(--gray-100)', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>
-                    <i className="fas fa-box" style={{ fontSize: '2rem', marginBottom: '15px', color: 'var(--secondary)' }}></i>
-                    <span style={{ display: 'block', fontWeight: 600 }}>ESSENTIAL UNITS</span>
+                <h3 className="quiz-question">Strategic Scope?</h3>
+                <div className="quiz-options-grid">
+                  <button className="quiz-opt" onClick={() => handleQuizAnswer(3, 'basics')}>
+                    <i className="fas fa-box"></i>
+                    <span>ESSENTIAL UNITS</span>
                   </button>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(3, 'full')} style={{ padding: '40px', background: 'var(--gray-100)', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>
-                    <i className="fas fa-boxes-packing" style={{ fontSize: '2rem', marginBottom: '15px', color: 'var(--secondary)' }}></i>
-                    <span style={{ display: 'block', fontWeight: 600 }}>COMPLETE SPECTRUM</span>
+                  <button className="quiz-opt" onClick={() => handleQuizAnswer(3, 'full')}>
+                    <i className="fas fa-boxes-packing"></i>
+                    <span>COMPLETE SPECTRUM</span>
                   </button>
                 </div>
               </div>
             )}
 
             {quizStep === 4 && (
-              <div style={{ textAlign: 'center', padding: '40px' }}>
-                <i className="fas fa-circle-notch fa-spin" style={{ fontSize: '3.5rem', color: 'var(--secondary)', marginBottom: '30px' }}></i>
-                <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '2rem', marginBottom: '10px' }}>Synchronizing Catalog</h3>
-                <p style={{ color: 'var(--text-muted)', fontStyle: 'italic', letterSpacing: '1px' }}>MATCHING NEONATAL PARAMETERS...</p>
+              <div className="quiz-calculating reveal-anim">
+                <div className="loader-container">
+                    <i className="fas fa-circle-notch fa-spin"></i>
+                </div>
+                <h3 className="calculating-title">Synchronizing Catalog</h3>
+                <p className="calculating-desc">MATCHING NEONATAL PARAMETERS...</p>
               </div>
             )}
 
             {quizStep === 5 && (
-              <div id="quiz-result" className="reveal-anim" style={{ textAlign: 'center' }}>
+              <div id="quiz-result" className="reveal-anim">
                 <div className="result-card">
-                  <span className="item-badge" style={{ background: 'var(--secondary)', color: 'white', border: 'none' }}>OPTIMAL SELECTION FOUND</span>
-                  <h3 style={{ fontSize: '2.5rem', marginBottom: '30px', fontFamily: 'Playfair Display, serif' }}>Your Bespoke Match</h3>
-                  <p id="result-text" style={{ fontSize: '1.2rem', marginBottom: '40px', maxWidth: '600px', margin: '0 auto 50px', lineHeight: 1.8 }} dangerouslySetInnerHTML={{ __html: recommendation }}></p>
-                  <button className="btn btn-primary" style={{ padding: '18px 50px', letterSpacing: '2px' }} onClick={scrolltoPackages}>INSPECT RECOMMENDATION</button>
+                  <span className="item-badge result-badge">OPTIMAL SELECTION FOUND</span>
+                  <h3 className="result-title">Your Bespoke Match</h3>
+                  <p id="result-text" className="result-text" dangerouslySetInnerHTML={{ __html: recommendation }}></p>
+                  <button className="btn btn-primary result-btn" onClick={scrolltoPackages}>INSPECT RECOMMENDATION</button>
                 </div>
               </div>
             )}
 
             {quizStep > 0 && quizStep < 4 && (
-              <div className="quiz-progress" style={{ marginTop: '40px' }}>
-                <div className="progress-bar" style={{ width: `${(quizStep / 3) * 100}%`, height: '2px', background: 'var(--secondary)' }}></div>
+              <div className="quiz-progress-container">
+                <div className="progress-bar" style={{ width: `${(quizStep / 3) * 100}%` }}></div>
               </div>
             )}
           </div>
         </div>
+      </section>
+
+      <section className="attributes-section reveal-anim">
+          <div className="container">
+              <div className="section-header-centered">
+                  <span className="item-badge">SIGNATURE ATTRIBUTES</span>
+                  <h2 className="section-title">The Victoria Standard</h2>
+                  <p className="section-desc">Every selection is governed by our strict tripartite of excellence.</p>
+              </div>
+              <div className="attributes-grid">
+                  <div className="attr-card stagger-1">
+                      <div className="attr-icon"><i className="fas fa-fingerprint"></i></div>
+                      <h4>Bespoke Selection</h4>
+                      <p>Custom-curated bundles tailored to your specific delivery timeline and needs.</p>
+                  </div>
+                  <div className="attr-card stagger-2">
+                      <div className="attr-icon"><i className="fas fa-vial"></i></div>
+                      <h4>Safety Audited</h4>
+                      <p>All items pass through rigorous neonatal safety screenings before inclusion.</p>
+                  </div>
+                  <div className="attr-card stagger-3">
+                      <div className="attr-icon"><i className="fas fa-leaf"></i></div>
+                      <h4>Organic Origin</h4>
+                      <p>Prioritizing sustainable, hypoallergenic fibers for maximum dermal protection.</p>
+                  </div>
+                  <div className="attr-card stagger-4">
+                      <div className="attr-icon"><i className="fas fa-shipping-fast"></i></div>
+                      <h4>Expedited Delivery</h4>
+                      <p>Seamless logistics ensuring your essentials arrive before your bundle of joy.</p>
+                  </div>
+              </div>
+          </div>
       </section>
 
       <section className="packages" id="packages" style={{ padding: '120px 0' }}>
@@ -210,47 +250,71 @@ const Home: React.FC = () => {
 
           <div className="package-grid">
             {/* Standard Package */}
-            <div className={`package-card reveal-anim stagger-1 ${targetPackage === 'Standard' ? 'highlight' : ''}`} style={{ background: 'white', padding: '40px', border: '1px solid var(--gray-100)', borderRadius: '8px', transition: '0.4s' }}>
-              <span className="item-badge" style={{ fontSize: '0.6rem' }}>Daily Essentials</span>
-              <div className="package-image" style={{ margin: '30px 0', height: '300px', overflow: 'hidden', borderRadius: '4px' }}>
+            <div className={`package-card reveal-anim stagger-1 ${targetPackage === 'Standard' ? 'highlight' : ''}`}>
+              <div className="package-image-container">
                 <PremiumImage src="https://images.unsplash.com/photo-1515488042-288109f25154?auto=format&fit=crop&w=1000&q=80" alt="Standard Package" />
+                <span className="package-tag">Daily Essentials</span>
               </div>
-              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem' }}>Standard Package</h3>
-              <p style={{ color: 'var(--text-muted)', marginBottom: '30px', fontSize: '0.9rem' }}>Comprehensive care for the foundational month.</p>
-              <div className="price" style={{ fontSize: '2rem', color: 'var(--primary)', marginBottom: '30px' }}>₦55,000</div>
-              <div className="package-actions" style={{ display: 'flex', gap: '15px' }}>
-                <button className="btn btn-primary add-to-cart" onClick={() => handleAddToCart({ _id: 'std-pkg', name: 'Standard Package', price: 55000, category: 'Essential', image: 'https://images.unsplash.com/photo-1515488042-288109f25154?auto=format&fit=crop&w=1000&q=80' })} style={{ flex: 2, padding: '15px' }}>ADD TO BAG</button>
-                <Link to="/shop" className="btn btn-secondary" style={{ flex: 1, textAlign: 'center', padding: '15px', fontSize: '0.7rem' }}>SPECS</Link>
+              <div className="package-content">
+                <h3 className="package-name">Standard Package</h3>
+                <p className="package-snippet">Essential neonatal care for the first month.</p>
+                <div className="package-footer">
+                  <div className="package-price">₦55,000</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'std-pkg', name: 'Standard Package', price: 55000, category: 'Essential', image: 'https://images.unsplash.com/photo-1515488042-288109f25154?auto=format&fit=crop&w=1000&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                    <Link to="/shop" className="btn-details-minimal" title="View Specifications">
+                        <i className="fas fa-arrow-right"></i>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Elite Package */}
-            <div className={`package-card reveal-anim stagger-2 featured-pkg ${targetPackage === 'Elite' ? 'highlight' : ''}`} style={{ background: 'white', padding: '40px', border: '1px solid var(--secondary)', borderRadius: '8px', transform: 'translateY(-20px)', boxShadow: '0 30px 60px rgba(0,0,0,0.05)' }}>
-              <span className="item-badge" style={{ background: 'var(--secondary)', color: 'white', border: 'none', fontSize: '0.6rem' }}>MOST PROCUREMENT</span>
-              <div className="package-image" style={{ margin: '30px 0', height: '300px', overflow: 'hidden', borderRadius: '4px' }}>
+            <div className={`package-card reveal-anim stagger-2 ${targetPackage === 'Elite' ? 'highlight' : ''} featured-kit`}>
+              <div className="package-image-container">
                 <PremiumImage src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80" alt="Elite Package" />
+                <span className="package-tag secondary">Medical Grade</span>
               </div>
-              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem' }}>Elite Manifest</h3>
-              <p style={{ color: 'var(--text-muted)', marginBottom: '30px', fontSize: '0.9rem' }}>A total 3-month medical-grade starter ecosystem.</p>
-              <div className="price" style={{ fontSize: '2rem', color: 'var(--primary)', marginBottom: '30px' }}>₦120,000</div>
-              <div className="package-actions" style={{ display: 'flex', gap: '15px' }}>
-                <button className="btn btn-primary add-to-cart" onClick={() => handleAddToCart({ _id: 'elite-pkg', name: 'Elite Package', price: 120000, category: 'Collection', image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80' })} style={{ flex: 2, padding: '15px' }}>ADD TO BAG</button>
-                <Link to="/shop" className="btn btn-secondary" style={{ flex: 1, textAlign: 'center', padding: '15px', fontSize: '0.7rem' }}>SPECS</Link>
+              <div className="package-content">
+                <h3 className="package-name">Elite Manifest</h3>
+                <p className="package-snippet">3-month comprehensive starter ecosystem.</p>
+                <div className="package-footer">
+                  <div className="package-price">₦120,000</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'elite-pkg', name: 'Elite Package', price: 120000, category: 'Collection', image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                    <Link to="/shop" className="btn-details-minimal" title="View Specifications">
+                        <i className="fas fa-arrow-right"></i>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* Premium Onesie */}
-            <div className="package-card reveal-anim stagger-3" style={{ background: 'white', padding: '40px', border: '1px solid var(--gray-100)', borderRadius: '8px' }}>
-              <span className="item-badge" style={{ fontSize: '0.6rem' }}>Premium Selection</span>
-              <div className="package-image" style={{ margin: '30px 0', height: '300px', overflow: 'hidden', borderRadius: '4px' }}>
+            <div className="package-card reveal-anim stagger-3">
+              <div className="package-image-container">
                 <PremiumImage src="https://images.unsplash.com/photo-1555032339-da9ea1603099?auto=format&fit=crop&w=1000&q=80" alt="Premium Collection" />
+                <span className="package-tag">Premium Organic</span>
               </div>
-              <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem' }}>Organic Unit Set</h3>
-              <p style={{ color: 'var(--text-muted)', marginBottom: '30px', fontSize: '0.9rem' }}>High-fidelity cotton care for neonatal integrity.</p>
-              <div className="price" style={{ fontSize: '2rem', color: 'var(--primary)', marginBottom: '30px' }}>₦15,000</div>
-              <div className="package-actions" style={{ display: 'flex', gap: '15px' }}>
-                <button className="btn btn-primary add-to-cart" onClick={() => handleAddToCart({ _id: 'onesie-set', name: 'Premium Onesie Set', price: 15000, category: 'Clothing', image: 'https://images.unsplash.com/photo-1555032339-da9ea1603099?auto=format&fit=crop&w=1000&q=80' })} style={{ flex: 2, padding: '15px' }}>ADD TO BAG</button>
-                <Link to="/shop" className="btn btn-secondary" style={{ flex: 1, textAlign: 'center', padding: '15px', fontSize: '0.7rem' }}>SPECS</Link>
+              <div className="package-content">
+                <h3 className="package-name">Organic Unit Set</h3>
+                <p className="package-snippet">High-fidelity cotton for neonatal integrity.</p>
+                <div className="package-footer">
+                  <div className="package-price">₦15,000</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'onesie-set', name: 'Premium Onesie Set', price: 15000, category: 'Clothing', image: 'https://images.unsplash.com/photo-1555032339-da9ea1603099?auto=format&fit=crop&w=1000&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                    <Link to="/shop" className="btn-details-minimal" title="View Specifications">
+                        <i className="fas fa-arrow-right"></i>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -278,6 +342,16 @@ const Home: React.FC = () => {
                   <i className="fas fa-hand-holding-heart"></i>
                   <h4>Neonatal Softness</h4>
                   <p>Materials selected for zero-friction interaction with newborn skin.</p>
+                </div>
+                <div className="philo-card">
+                    <i className="fas fa-microscope"></i>
+                    <h4>Textile Research</h4>
+                    <p>Continuous analysis of fabric breathability and thermal regulation.</p>
+                </div>
+                <div className="philo-card">
+                    <i className="fas fa-award"></i>
+                    <h4>Boutique Quality</h4>
+                    <p>Small-batch production ensuring every stitch meets our legacy standards.</p>
                 </div>
               </div>
             </div>

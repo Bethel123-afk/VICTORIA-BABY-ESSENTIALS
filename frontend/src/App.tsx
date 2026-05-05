@@ -21,6 +21,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
+import AuthGate from './components/AuthGate';
 
 interface LayoutProps {
   children: ReactNode;
@@ -49,7 +50,11 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/login" element={<Auth />} />
+          <Route element={<AuthGate />}>
+            <Route path="/login" element={<Auth />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+          </Route>
+
           <Route path="/checkout" element={<ProtectedRoute />}>
             <Route index element={<Checkout />} />
           </Route>
@@ -60,7 +65,6 @@ const App: React.FC = () => {
             <Route index element={<OrderSuccess />} />
           </Route>
           
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword/:resettoken" element={<ResetPassword />} />
           
           <Route path="/dashboard" element={<ProtectedRoute />}>
