@@ -474,25 +474,30 @@ const Home: React.FC = () => {
                 "We do not merely sell products; we authorize peace of mind for the transition into parenthood."
               </p>
               <div className="philosophy-grid">
-                <div className="philo-card">
+                <div className="philo-card stagger-1">
                   <i className="fas fa-shield-virus"></i>
                   <h4>Clinical Vetting</h4>
-                  <p>Every inventory unit undergoes a rigorous 12-point integrity check.</p>
+                  <p>Every inventory unit undergoes a rigorous 12-point integrity check to ensure medical-grade safety.</p>
                 </div>
-                <div className="philo-card">
+                <div className="philo-card stagger-2">
                   <i className="fas fa-hand-holding-heart"></i>
                   <h4>Neonatal Softness</h4>
-                  <p>Materials selected for zero-friction interaction with newborn skin.</p>
+                  <p>Materials are selected for zero-friction interaction, protecting the fragile neonatal dermal barrier.</p>
                 </div>
-                <div className="philo-card">
+                <div className="philo-card stagger-3">
                     <i className="fas fa-microscope"></i>
                     <h4>Textile Research</h4>
-                    <p>Continuous analysis of fabric breathability and thermal regulation.</p>
+                    <p>Continuous analysis of fabric breathability and thermal regulation for optimal neonatal homeostasis.</p>
                 </div>
-                <div className="philo-card">
+                <div className="philo-card stagger-4">
                     <i className="fas fa-award"></i>
                     <h4>Boutique Quality</h4>
-                    <p>Small-batch production ensuring every stitch meets our legacy standards.</p>
+                    <p>Small-batch production protocols ensuring every stitch meets our strict legacy standards of excellence.</p>
+                </div>
+                <div className="philo-card stagger-5">
+                    <i className="fas fa-leaf"></i>
+                    <h4>Ethical Sourcing</h4>
+                    <p>Priority access to sustainable, organic fibers sourced from certified biological cultivators globally.</p>
                 </div>
               </div>
             </div>

@@ -765,8 +765,8 @@ h4,
 
 .philosophy-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
     margin-top: 60px;
 }
 
