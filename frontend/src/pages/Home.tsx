@@ -159,7 +159,7 @@ const Home: React.FC = () => {
             {quizStep === 3 && (
               <div className="quiz-step active reveal-anim" data-step="3">
                 <h3 style={{ textAlign: 'center', fontSize: '1.8rem', fontFamily: 'Playfair Display, serif', marginBottom: '40px' }}>Strategic Scope?</h3>
-                <div className="quiz-options" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                <div className="quiz-options" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '20px' }}>
                   <button className="quiz-opt" onClick={() => handleQuizAnswer(3, 'basics')} style={{ padding: '40px', background: 'var(--gray-100)', border: 'none', borderRadius: '8px', cursor: 'pointer' }}>
                     <i className="fas fa-box" style={{ fontSize: '2rem', marginBottom: '15px', color: 'var(--secondary)' }}></i>
                     <span style={{ display: 'block', fontWeight: 600 }}>ESSENTIAL UNITS</span>

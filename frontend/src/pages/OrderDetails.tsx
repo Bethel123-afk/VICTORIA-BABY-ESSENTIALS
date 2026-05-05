@@ -111,7 +111,7 @@ const OrderDetails: React.FC = () => {
                         </div>
                     </div>
 
-                    <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px', marginBottom: '60px'}}>
+                    <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '60px'}}>
                         <div>
                             <span style={{fontSize: '0.6rem', textTransform: 'uppercase', letterSpacing: '2px', color: 'var(--text-muted)', display: 'block', marginBottom: '15px'}}>Client Identity</span>
                             <strong style={{display: 'block', fontSize: '0.9rem'}}>

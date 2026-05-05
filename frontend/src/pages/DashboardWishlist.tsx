@@ -69,21 +69,19 @@ const DashboardWishlist: React.FC = () => {
                  <Link to="/shop" className="btn btn-primary" style={{padding: '18px 40px', fontSize: '0.75rem'}}>Access Storefront</Link>
              </div>
          ) : (
-            <div className="order-records-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '30px'}}>
+            <div className="wishlist-grid order-records-grid">
                 {wishlistItems.map(item => (
-                    <div className="item-card reveal-anim" key={item._id} style={{ 
+                    <div className="item-card reveal-anim wishlist-product-card" key={item._id} style={{ 
                         display: 'flex', 
                         flexDirection: 'column', 
                         height: '100%',
-                        padding: '15px',
                         background: 'var(--white)',
                         borderRadius: '8px',
                         border: '1px solid var(--gray-100)',
                         transition: 'var(--transition-premium)'
                     }}>
-                       <div className="img-wrapper" style={{
+                       <div className="img-wrapper wishlist-img-wrapper" style={{
                            background: 'var(--gray-100)', 
-                           height: '220px', 
                            width: '100%', 
                            overflow: 'hidden', 
                            position: 'relative',

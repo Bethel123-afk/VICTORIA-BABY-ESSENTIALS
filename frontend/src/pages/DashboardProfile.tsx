@@ -136,7 +136,7 @@ const DashboardProfile: React.FC = () => {
                             <h3 style={{fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '3px', color: 'var(--secondary)', marginBottom: '30px', borderBottom: '1px solid var(--gray-100)', paddingBottom: '10px'}}>
                                 Biological Identity
                             </h3>
-                            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px'}}>
+                            <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px'}}>
                                 <div className="profile-field">
                                     <label>Legal Name</label>
                                     <p style={{fontSize: '1.2rem'}}>{userInfo?.name}</p>
@@ -176,7 +176,7 @@ const DashboardProfile: React.FC = () => {
                         <h3 style={{fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '3px', color: 'var(--secondary)', marginBottom: '30px', borderBottom: '1px solid var(--gray-100)', paddingBottom: '10px'}}>
                             Modify Registry Data
                         </h3>
-                        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px'}}>
+                        <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px'}}>
                             <div className="profile-field">
                                 <label>Legal Name</label>
                                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} required placeholder="Enter full name" />
@@ -198,7 +198,7 @@ const DashboardProfile: React.FC = () => {
                         <h3 style={{fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '3px', color: 'var(--secondary)', margin: '40px 0 30px 0', borderBottom: '1px solid var(--gray-100)', paddingBottom: '10px'}}>
                             Security Update
                         </h3>
-                        <div className="profile-field" style={{maxWidth: '50%'}}>
+                        <div className="profile-field" style={{maxWidth: '100%'}}>
                             <label>Secret Key (New Password)</label>
                             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Leave blank to maintain current" />
                         </div>
