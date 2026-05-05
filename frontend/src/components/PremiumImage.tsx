@@ -22,6 +22,8 @@ const PremiumImage: React.FC<PremiumImageProps> = ({ src, alt, className, style,
             position: 'relative', 
             overflow: 'hidden', 
             background: 'var(--gray-100)',
+            width: '100%',
+            height: '100%',
             ...style 
         }}
     >
