@@ -5451,6 +5451,228 @@ h4,
     font-size: 2rem;
 }
 
+/* Quiz Premium Enhancements */
+.quiz-container-premium {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.04);
+}
+
+.quiz-inner {
+    padding: 60px;
+}
+
+@media (max-width: 768px) {
+    .quiz-inner { padding: 30px 20px; }
+}
+
+.quiz-intro-v2 {
+    text-align: center;
+}
+
+.protocol-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(44, 62, 80, 0.05);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    font-size: 2rem;
+}
+
+.quiz-step-v2 .step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.step-count {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.step-progress-mini {
+    width: 150px;
+    height: 4px;
+    background: var(--gray-100);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.step-progress-mini .bar {
+    height: 100%;
+    background: var(--secondary);
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.options-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.option-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid var(--gray-100);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition-premium);
+    text-align: left;
+    width: 100%;
+}
+
+.option-card:hover {
+    border-color: var(--secondary);
+    background: var(--background);
+    transform: translateX(10px);
+}
+
+.opt-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--gray-100);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.option-card:hover .opt-icon {
+    background: var(--secondary);
+    color: white;
+}
+
+.opt-text strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.opt-text span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Scanning Phase */
+.scanning-phase {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.scanner {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(142, 151, 117, 0.05);
+    border-radius: 50%;
+    color: var(--secondary);
+    font-size: 3rem;
+}
+
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--secondary);
+    box-shadow: 0 0 15px var(--secondary);
+    animation: scanMove 2s infinite ease-in-out;
+}
+
+@keyframes scanMove {
+    0%, 100% { top: 10%; opacity: 0; }
+    50% { top: 90%; opacity: 1; }
+}
+
+.scan-labels {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.scan-labels span {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    animation: pulseText 1.5s infinite;
+}
+
+@keyframes pulseText {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* Result Phase */
+.result-phase-v2 {
+    text-align: center;
+}
+
+.check-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+}
+
+.result-box {
+    background: var(--background);
+    padding: 30px;
+    border-radius: 12px;
+    margin: 30px 0 40px;
+    border-left: 4px solid var(--secondary);
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.result-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    .result-actions { flex-direction: column; }
+    .result-actions .btn { width: 100%; }
+}
+
 .quiz-calculating {
     text-align: center;
     padding: 60px 20px;

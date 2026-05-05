@@ -21,15 +21,15 @@ const Home: React.FC = () => {
         const newAnswers = { ...quizAnswers, [step]: value };
         setQuizAnswers(newAnswers);
 
+        // Smooth transition to next step or calculation
         if (step < 3) {
-            setTimeout(() => {
-                setQuizStep(step + 1);
-            }, 600);
+            setQuizStep(step + 1);
         } else {
-            setQuizStep(4); // Calculating
+            setQuizStep(4); // Initiate Scanning Phase
+            // Simulation of data synthesis
             setTimeout(() => {
                 calculateResult(newAnswers);
-            }, 2000); // Slightly longer for more "simulated processing" feel
+            }, 1800);
         }
     };
 
@@ -38,13 +38,13 @@ const Home: React.FC = () => {
         let target = "";
 
         if (answers[3] === 'full') {
-            rec = "Based on your focus on a complete setup, we highly recommend the **Elite Package**. It provides everything you need for full-scale readiness.";
+            rec = "<strong>Elite Configuration:</strong> Based on your focus on a complete setup, we have authorized the <strong>Elite Manifest</strong>. This spectrum provides 100% readiness for the first 90 days of neonatal care.";
             target = "Elite";
         } else if (answers[1] === 'new-mom' || answers[2] === 'late') {
-            rec = "As you embark on your first journey or reach the final days, the **Standard Package** offers the perfect balance of care and comfort.";
+            rec = "<strong>Standard Protocol:</strong> As you prepare for an immediate arrival, our <strong>Standard Package</strong> offers the optimal equilibrium of essential protection and clinical comfort.";
             target = "Standard";
         } else {
-            rec = "For the experienced mother seeking foundational necessity, the **Standard Package** is our carefully chosen selection of essentials.";
+            rec = "<strong>Foundational Setup:</strong> For the experienced matriarch, we recommend the <strong>Standard Package</strong>—a curated selection of essential replenishment units.";
             target = "Standard";
         }
 
@@ -111,99 +111,131 @@ const Home: React.FC = () => {
       <section className="quiz-section reveal-anim" id="quiz">
         <div className="container">
           <div className="section-header-centered">
-            <span className="item-badge">PERSONALIZED CURATION</span>
-            <h2 className="section-title">Match Your Journey</h2>
-            <p className="section-desc">Identify the ideal essential configuration for your transition into motherhood.</p>
+            <span className="item-badge">PREVENTATIVE CURATION</span>
+            <h2 className="section-title">Diagnostic Protocol</h2>
+            <p className="section-desc">Syncing your neonatal requirements with our clinical-grade inventory.</p>
           </div>
 
-          <div className="quiz-container reveal-anim" id="quiz-box">
-            {quizStep === 0 && (
-              <div className="quiz-intro">
-                <div className="quiz-icon-wrapper">
-                    <i className="fas fa-microscope"></i>
+          <div className="quiz-container-premium">
+            <div className="quiz-inner">
+                {quizStep === 0 && (
+                <div className="quiz-intro-v2 reveal-anim">
+                    <div className="protocol-icon">
+                        <i className="fas fa-microscope"></i>
+                    </div>
+                    <h3>Initialize Selection Engine</h3>
+                    <p>Enter your situational parameters to generate a bespoke procurement manifest.</p>
+                    <button className="btn btn-primary" onClick={handleStartQuiz}>START DIAGNOSIS</button>
                 </div>
-                <h3 className="quiz-title">Diagnostic Protocol</h3>
-                <p className="quiz-desc">
-                  Our proprietary selection engine synchronizes your current needs with our clinical-grade inventory.
-                </p>
-                <button className="btn btn-primary start-quiz-btn" onClick={handleStartQuiz}>INITIATE SELECTION</button>
-              </div>
-            )}
+                )}
 
-            {quizStep === 1 && (
-              <div className="quiz-step active reveal-anim" data-step="1">
-                <h3 className="quiz-question">Identity Status?</h3>
-                <div className="quiz-options-grid">
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(1, 'new-mom')}>
-                    <i className="fas fa-star-of-life"></i>
-                    <span>NEONATAL FIRST JOURNEY</span>
-                  </button>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(1, 'pro-mom')}>
-                    <i className="fas fa-award"></i>
-                    <span>EXPERIENCED MATRIARCH</span>
-                  </button>
+                {quizStep >= 1 && quizStep <= 3 && (
+                <div className="quiz-step-v2 active">
+                    <div className="step-header">
+                        <span className="step-count">Step {quizStep} of 3</span>
+                        <div className="step-progress-mini">
+                            <div className="bar" style={{ width: `${(quizStep / 3) * 100}%` }}></div>
+                        </div>
+                    </div>
+                    
+                    {quizStep === 1 && (
+                        <div className="step-content reveal-anim">
+                            <h3 className="question-text">Identify Current Status</h3>
+                            <div className="options-flex">
+                                <button className="option-card" onClick={() => handleQuizAnswer(1, 'new-mom')}>
+                                    <div className="opt-icon"><i className="fas fa-baby"></i></div>
+                                    <div className="opt-text">
+                                        <strong>First Journey</strong>
+                                        <span>New to motherhood</span>
+                                    </div>
+                                </button>
+                                <button className="option-card" onClick={() => handleQuizAnswer(1, 'pro-mom')}>
+                                    <div className="opt-icon"><i className="fas fa-crown"></i></div>
+                                    <div className="opt-text">
+                                        <strong>Experienced</strong>
+                                        <span>Expanding the legacy</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {quizStep === 2 && (
+                        <div className="step-content reveal-anim">
+                            <h3 className="question-text">Preparation Phase</h3>
+                            <div className="options-flex">
+                                <button className="option-card" onClick={() => handleQuizAnswer(2, 'early')}>
+                                    <div className="opt-icon"><i className="fas fa-calendar-check"></i></div>
+                                    <div className="opt-text">
+                                        <strong>Early Stage</strong>
+                                        <span>Meticulous planning</span>
+                                    </div>
+                                </button>
+                                <button className="option-card" onClick={() => handleQuizAnswer(2, 'late')}>
+                                    <div className="opt-icon"><i className="fas fa-bolt"></i></div>
+                                    <div className="opt-text">
+                                        <strong>Immediate</strong>
+                                        <span>Arrival imminent</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    {quizStep === 3 && (
+                        <div className="step-content reveal-anim">
+                            <h3 className="question-text">Desired Strategic Scope</h3>
+                            <div className="options-flex">
+                                <button className="option-card" onClick={() => handleQuizAnswer(3, 'basics')}>
+                                    <div className="opt-icon"><i className="fas fa-box-open"></i></div>
+                                    <div className="opt-text">
+                                        <strong>Foundational</strong>
+                                        <span>Core essentials only</span>
+                                    </div>
+                                </button>
+                                <button className="option-card" onClick={() => handleQuizAnswer(3, 'full')}>
+                                    <div className="opt-icon"><i className="fas fa-layer-group"></i></div>
+                                    <div className="opt-text">
+                                        <strong>Full Spectrum</strong>
+                                        <span>Complete ecosystem</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
-              </div>
-            )}
+                )}
 
-            {quizStep === 2 && (
-              <div className="quiz-step active reveal-anim" data-step="2">
-                <h3 className="quiz-question">Preparation Phase?</h3>
-                <div className="quiz-options-grid">
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(2, 'early')}>
-                    <i className="fas fa-compass"></i>
-                    <span>EARLY PROCUREMENT</span>
-                  </button>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(2, 'late')}>
-                    <i className="fas fa-clock"></i>
-                    <span>IMMEDIATE ARRIVAL</span>
-                  </button>
+                {quizStep === 4 && (
+                <div className="scanning-phase reveal-anim">
+                    <div className="scanner">
+                        <div className="scan-line"></div>
+                        <i className="fas fa-dna"></i>
+                    </div>
+                    <h3>Synthesizing Inventory</h3>
+                    <div className="scan-labels">
+                        <span>CROSS-REFERENCING CLINICAL DATA...</span>
+                        <span>VERIFYING STOCK LEVELS...</span>
+                    </div>
                 </div>
-              </div>
-            )}
+                )}
 
-            {quizStep === 3 && (
-              <div className="quiz-step active reveal-anim" data-step="3">
-                <h3 className="quiz-question">Strategic Scope?</h3>
-                <div className="quiz-options-grid">
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(3, 'basics')}>
-                    <i className="fas fa-box"></i>
-                    <span>ESSENTIAL UNITS</span>
-                  </button>
-                  <button className="quiz-opt" onClick={() => handleQuizAnswer(3, 'full')}>
-                    <i className="fas fa-boxes-packing"></i>
-                    <span>COMPLETE SPECTRUM</span>
-                  </button>
+                {quizStep === 5 && (
+                <div className="result-phase-v2 reveal-anim">
+                    <div className="result-header">
+                        <div className="check-icon"><i className="fas fa-check-double"></i></div>
+                        <h3>Diagnosis Complete</h3>
+                    </div>
+                    <div className="result-box">
+                        <p dangerouslySetInnerHTML={{ __html: recommendation }}></p>
+                    </div>
+                    <div className="result-actions">
+                        <button className="btn btn-primary" onClick={scrolltoPackages}>INSPECT MANIFEST</button>
+                        <button className="btn btn-secondary" onClick={() => setQuizStep(0)}>RE-INITIATE</button>
+                    </div>
                 </div>
-              </div>
-            )}
-
-            {quizStep === 4 && (
-              <div className="quiz-calculating reveal-anim">
-                <div className="loader-container">
-                    <i className="fas fa-circle-notch fa-spin"></i>
-                </div>
-                <h3 className="calculating-title">Synchronizing Catalog</h3>
-                <p className="calculating-desc">MATCHING NEONATAL PARAMETERS...</p>
-              </div>
-            )}
-
-            {quizStep === 5 && (
-              <div id="quiz-result" className="reveal-anim">
-                <div className="result-card">
-                  <span className="item-badge result-badge">OPTIMAL SELECTION FOUND</span>
-                  <h3 className="result-title">Your Bespoke Match</h3>
-                  <p id="result-text" className="result-text" dangerouslySetInnerHTML={{ __html: recommendation }}></p>
-                  <button className="btn btn-primary result-btn" onClick={scrolltoPackages}>INSPECT RECOMMENDATION</button>
-                </div>
-              </div>
-            )}
-
-            {quizStep > 0 && quizStep < 4 && (
-              <div className="quiz-progress-container">
-                <div className="progress-bar" style={{ width: `${(quizStep / 3) * 100}%` }}></div>
-              </div>
-            )}
+                )}
+            </div>
           </div>
         </div>
       </section>
