@@ -102,6 +102,18 @@ This platform is optimized for deployment on **Railway**.
     npm start
     ```
 
+### 🔑 Environment Variables Checklist
+Ensure these variables are set in your Railway dashboard:
+- `MONGO_URI`: Your MongoDB connection string.
+- `JWT_SECRET`: A secure string for token signing.
+- `VITE_FLUTTERWAVE_PUBLIC_KEY`: Frontend payment key.
+- `FLUTTERWAVE_SECRET_KEY`: Backend payment key.
+- `NODE_ENV`: Set to `production`.
+
+### ⚠️ Troubleshooting
+- **UTF-8 Encoding**: If you encounter `stream did not contain valid UTF-8` errors during the build, ensure all `.js` files are saved with UTF-8 encoding (not UTF-16).
+- **Build Failures**: Ensure you are using Node.js v18 or higher (defined in the root `package.json`).
+
 ## 📄 License
 
 This project is licensed under the ISC License.
