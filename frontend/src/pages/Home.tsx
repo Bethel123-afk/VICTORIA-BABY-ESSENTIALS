@@ -321,6 +321,115 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      <section className="featured-selection reveal-anim" style={{ padding: '80px 0', background: 'var(--white)' }}>
+        <div className="container">
+          <div className="section-header-centered" style={{ marginBottom: '60px' }}>
+            <span className="item-badge">CURATED SELECTION</span>
+            <h2 className="section-title" style={{ fontSize: '2.5rem' }}>Trending Essentials</h2>
+            <p className="section-desc">Highly sought-after units from our current registry.</p>
+          </div>
+          <div className="package-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            <div className="package-card reveal-anim stagger-1">
+              <div className="package-image-container" style={{ height: '200px' }}>
+                <PremiumImage src="https://images.unsplash.com/photo-1555032339-da9ea1603099?auto=format&fit=crop&w=800&q=80" alt="Onesie" />
+                <span className="package-tag">Top Choice</span>
+              </div>
+              <div className="package-content" style={{ padding: '20px' }}>
+                <h3 className="package-name" style={{ fontSize: '1.2rem' }}>Premium Cotton Onesie</h3>
+                <p className="package-snippet" style={{ fontSize: '0.8rem' }}>Organic fibers for neonatal integrity.</p>
+                <div className="package-footer" style={{ paddingTop: '15px' }}>
+                  <div className="package-price" style={{ fontSize: '1rem' }}>₦3,500</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'onesie', name: 'Premium Cotton Onesie', price: 3500, category: 'Essential', image: 'https://images.unsplash.com/photo-1555032339-da9ea1603099?auto=format&fit=crop&w=800&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="package-card reveal-anim stagger-2">
+              <div className="package-image-container" style={{ height: '200px' }}>
+                <PremiumImage src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?auto=format&fit=crop&w=800&q=80" alt="Blanket" />
+                <span className="package-tag">Warmth</span>
+              </div>
+              <div className="package-content" style={{ padding: '20px' }}>
+                <h3 className="package-name" style={{ fontSize: '1.2rem' }}>Thermal Fleece Blanket</h3>
+                <p className="package-snippet" style={{ fontSize: '0.8rem' }}>Optimal neonatal thermal regulation.</p>
+                <div className="package-footer" style={{ paddingTop: '15px' }}>
+                  <div className="package-price" style={{ fontSize: '1rem' }}>₦8,000</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'blanket', name: 'Thermal Fleece Blanket', price: 8000, category: 'Essential', image: 'https://images.unsplash.com/photo-1520333789090-1afc82db536a?auto=format&fit=crop&w=800&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="package-card reveal-anim stagger-3">
+              <div className="package-image-container" style={{ height: '200px' }}>
+                <PremiumImage src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=80" alt="Socks" />
+                <span className="package-tag">Set of 5</span>
+              </div>
+              <div className="package-content" style={{ padding: '20px' }}>
+                <h3 className="package-name" style={{ fontSize: '1.2rem' }}>Thermal Socks Set</h3>
+                <p className="package-snippet" style={{ fontSize: '0.8rem' }}>Heat-retentive for peripheral warmth.</p>
+                <div className="package-footer" style={{ paddingTop: '15px' }}>
+                  <div className="package-price" style={{ fontSize: '1rem' }}>₦2,500</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'socks', name: 'Thermal Socks (Set of 5)', price: 2500, category: 'Essential', image: 'https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="package-card reveal-anim stagger-4">
+              <div className="package-image-container" style={{ height: '200px' }}>
+                <PremiumImage src="https://images.unsplash.com/photo-1544126592-807daa2b5652?auto=format&fit=crop&w=800&q=80" alt="Diapers" />
+                <span className="package-tag">Sanitary</span>
+              </div>
+              <div className="package-content" style={{ padding: '20px' }}>
+                <h3 className="package-name" style={{ fontSize: '1.2rem' }}>Premium Diaper Suite</h3>
+                <p className="package-snippet" style={{ fontSize: '0.8rem' }}>High-absorbency neonatal dryness.</p>
+                <div className="package-footer" style={{ paddingTop: '15px' }}>
+                  <div className="package-price" style={{ fontSize: '1rem' }}>₦18,000</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'diapers', name: 'Premium Diaper Suite', price: 18000, category: 'Essential', image: 'https://images.unsplash.com/photo-1544126592-807daa2b5652?auto=format&fit=crop&w=800&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="package-card reveal-anim stagger-5">
+              <div className="package-image-container" style={{ height: '200px' }}>
+                <PremiumImage src="https://images.unsplash.com/photo-1604176427245-df2f5458931b?auto=format&fit=crop&w=800&q=80" alt="Swaddle" />
+                <span className="package-tag">Organic</span>
+              </div>
+              <div className="package-content" style={{ padding: '20px' }}>
+                <h3 className="package-name" style={{ fontSize: '1.2rem' }}>Muslin Swaddle Set</h3>
+                <p className="package-snippet" style={{ fontSize: '0.8rem' }}>Secure, breathable comfort weave.</p>
+                <div className="package-footer" style={{ paddingTop: '15px' }}>
+                  <div className="package-price" style={{ fontSize: '1rem' }}>₦6,500</div>
+                  <div className="package-btns">
+                    <button className="btn-cart-minimal" onClick={() => handleAddToCart({ _id: 'swaddle', name: 'Muslin Swaddle Set (x3)', price: 6500, category: 'Essential', image: 'https://images.unsplash.com/photo-1604176427245-df2f5458931b?auto=format&fit=crop&w=800&q=80' })} title="Add to Bag">
+                        <i className="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '60px' }}>
+            <Link to="/shop" className="btn btn-secondary">EXPLORE FULL REGISTRY</Link>
+          </div>
+        </div>
+      </section>
+
       <section className="about-section reveal-anim" id="about">
         <div className="container">
           <div className="about-grid">
