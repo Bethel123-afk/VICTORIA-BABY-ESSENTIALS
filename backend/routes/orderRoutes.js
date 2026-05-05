@@ -44,6 +44,18 @@ router.post('/', protect, async (req, res) => {
   }
 });
 
+// @desc    Get logged in user orders
+// @route   GET /api/orders/myorders
+// @access  Private
+router.get('/myorders', protect, async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.user._id });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // @desc    Get order by ID
 // @route   GET /api/orders/:id
 // @access  Private
@@ -86,18 +98,6 @@ router.put('/:id/pay', protect, async (req, res) => {
     } else {
       res.status(404).json({ message: 'Order not found' });
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// @desc    Get logged in user orders
-// @route   GET /api/orders/myorders
-// @access  Private
-router.get('/myorders', protect, async (req, res) => {
-  try {
-    const orders = await Order.find({ user: req.user._id });
-    res.json(orders);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
