@@ -86,7 +86,7 @@ router.put('/profile', protect, async (req, res) => {
 });
 
 const crypto = require('crypto');
-const { sendEmail, getPasswordResetTemplate } = require('../utils/emailService');
+const { sendEmail } = require('../utils/emailService');
 
 // @desc    Forgot password
 // @route   POST /api/users/forgotpassword
@@ -111,7 +111,7 @@ router.post('/forgotpassword', async (req, res) => {
     await sendEmail({
       email: user.email,
       subject: 'Password Reset Request',
-      html: getPasswordResetTemplate(resetUrl),
+      html: `<p>You requested a password reset. Please click <a href="${resetUrl}">here</a> to reset your password. This link is active for 10 minutes.</p>`,
     });
 
     res.status(200).json({ message: 'Email sent' });
