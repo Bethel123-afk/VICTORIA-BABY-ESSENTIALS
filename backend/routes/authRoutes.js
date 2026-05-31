@@ -12,17 +12,24 @@ router.post('/login', async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
-    });
-  } else {
-    res.status(401).json({ message: 'Invalid email or password' });
+  // Gate 1: Check if account exists
+  if (!user) {
+    return res.status(401).json({ message: 'Account not found. Please create an account first.' });
   }
+
+  // Gate 2: Check if password matches
+  if (!(await user.matchPassword(password))) {
+    return res.status(401).json({ message: 'Incorrect password.' });
+  }
+
+  // Success: Log the user in
+  res.json({
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+    token: generateToken(user._id),
+  });
 });
 
 // @desc    Register a new user
