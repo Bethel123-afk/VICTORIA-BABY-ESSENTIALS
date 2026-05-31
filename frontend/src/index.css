@@ -5932,4 +5932,115 @@ h4,
     gap: 20px;
 }
 
+/* ==========================================================================
+   VICTORIA PREMIUM MICRO-ANIMATIONS & INTERACTIVE STATES
+   ========================================================================== */
+
+/* Add to Wishlist Button Styling */
+.add-to-wishlist {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10;
+}
+
+.add-to-wishlist i {
+    font-size: 1.15rem;
+    color: var(--primary);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.add-to-wishlist:hover {
+    background: #fff;
+    transform: scale(1.15);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+.add-to-wishlist:active i {
+    transform: scale(0.8);
+}
+
+.add-to-wishlist .fa-heart {
+    color: var(--heart) !important;
+    animation: heartPulse 0.45s ease-out;
+}
+
+@keyframes heartPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+/* Glassmorphic Search Control Panels */
+.shop-controls.glass-panel {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+/* Jumia Boutique Add-to-Cart Custom Button Transitions */
+.btn-jumia-add {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.1);
+}
+
+.btn-jumia-add:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(142, 151, 117, 0.25);
+}
+
+.btn-jumia-add:active {
+    transform: translateY(0);
+}
+
+/* Premium Image Wrappers Scale Transition */
+.img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+}
+
+.item-card-premium:hover .product-image img {
+    transform: scale(1.08);
+}
+
+.product-image img {
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Toast popup micro-animation adjustments */
+.toast-premium {
+    animation: toastSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1), toastBounce 0.4s 0.5s ease-in-out;
+}
+
+@keyframes toastSlideIn {
+    from { transform: translateX(120%) scale(0.9); opacity: 0; }
+    to { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+
 
