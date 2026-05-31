@@ -10,6 +10,7 @@ const Auth: React.FC = () => {
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
   const { userInfo, login } = useAuth();
@@ -29,6 +30,7 @@ const Auth: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
 
     try {
       if (mode === 'login') {
@@ -36,9 +38,12 @@ const Auth: React.FC = () => {
         login(data);
         navigate(redirect);
       } else {
-        const { data } = await axios.post('/api/auth/register', { name, email, password, phone });
-        login(data);
-        navigate(redirect);
+        await axios.post('/api/auth/register', { name, email, password, phone });
+        setSuccess('Registration successful! Please log in below to access your account.');
+        setMode('login');
+        setName('');
+        setPhone('');
+        setPassword('');
       }
     } catch (err: any) {
       setError(err.response && err.response.data.message ? err.response.data.message : err.message);
@@ -51,6 +56,7 @@ const Auth: React.FC = () => {
     e.preventDefault();
     setMode(mode === 'login' ? 'register' : 'login');
     setError('');
+    setSuccess('');
     setName('');
     setPhone('');
   };
@@ -71,6 +77,21 @@ const Auth: React.FC = () => {
         <form onSubmit={submitHandler} className="auth-form-card reveal-anim stagger-2">
           
           {error && <div className="error-banner">{error}</div>}
+          {success && (
+            <div className="success-banner" style={{
+              background: 'rgba(16, 185, 129, 0.1)',
+              border: '1px solid #10b981',
+              color: '#10b981',
+              padding: '12px 16px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              fontSize: '0.9rem',
+              lineHeight: '1.5',
+              textAlign: 'center'
+            }}>
+              {success}
+            </div>
+          )}
 
           {mode === 'register' && (
             <>
