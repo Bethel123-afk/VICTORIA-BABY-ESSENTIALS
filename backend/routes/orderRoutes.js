@@ -3,7 +3,7 @@ const router = express.Router();
 const Order = require('../models/Order');
 const User = require('../models/User'); // Import User for details
 const { protect, admin } = require('../middleware/authMiddleware');
-const { sendEmail, getOrderEmailTemplate } = require('../utils/emailService');
+const { sendEmail, getOrderEmailTemplate, getAdminOrderAlertTemplate } = require('../utils/emailService');
 router.post('/', protect, async (req, res) => {
   try {
     const {
@@ -94,6 +94,23 @@ router.put('/:id/pay', protect, async (req, res) => {
       };
 
       const updatedOrder = await order.save();
+
+      // Send Payment Receipt Email to Customer
+      sendEmail({
+        email: req.user.email,
+        subject: `Payment Confirmed - Order #${updatedOrder._id.toString().slice(-8).toUpperCase()}`,
+        html: getOrderEmailTemplate(updatedOrder, 'placed'),
+      }).catch(err => console.error('Customer payment email receipt failed:', err));
+
+      // Send Alert Email to Admin
+      if (process.env.ADMIN_EMAIL) {
+        sendEmail({
+          email: process.env.ADMIN_EMAIL,
+          subject: `Alert: New Paid Order #${updatedOrder._id.toString().slice(-8).toUpperCase()}`,
+          html: getAdminOrderAlertTemplate(updatedOrder, req.user),
+        }).catch(err => console.error('Admin order alert failed:', err));
+      }
+
       res.json(updatedOrder);
     } else {
       res.status(404).json({ message: 'Order not found' });

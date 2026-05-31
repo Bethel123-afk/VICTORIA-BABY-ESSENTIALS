@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
+const { sendEmail, getWelcomeEmailTemplate, getAdminRegistrationAlertTemplate } = require('../utils/emailService');
 
 // @desc    Auth user & get token
 // @route   POST /api/auth/login
@@ -45,6 +46,22 @@ router.post('/register', async (req, res) => {
   });
 
   if (user) {
+    // Send Welcome Email to Customer
+    sendEmail({
+      email: user.email,
+      subject: 'Welcome to Victoria Baby Essentials!',
+      html: getWelcomeEmailTemplate(user.name),
+    }).catch(err => console.error('Welcome email failed:', err));
+
+    // Send Alert Email to Admin
+    if (process.env.ADMIN_EMAIL) {
+      sendEmail({
+        email: process.env.ADMIN_EMAIL,
+        subject: `New User Registration: ${user.name}`,
+        html: getAdminRegistrationAlertTemplate(user),
+      }).catch(err => console.error('Admin registration alert failed:', err));
+    }
+
     res.status(201).json({
       _id: user._id,
       name: user.name,
