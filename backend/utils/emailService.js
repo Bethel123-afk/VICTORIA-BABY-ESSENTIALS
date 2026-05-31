@@ -236,7 +236,6 @@ const getAdminOrderAlertTemplate = (order, user) => {
 module.exports = {
   sendEmail,
   getOrderEmailTemplate,
-  getPasswordResetTemplate,
   getWelcomeEmailTemplate,
   getAdminRegistrationAlertTemplate,
   getAdminOrderAlertTemplate,
