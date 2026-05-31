@@ -2,23 +2,20 @@ const nodemailer = require('nodemailer');
 const https = require('https');
 
 const sendEmail = async (options) => {
-  const smtpPass = process.env.SMTP_PASS || '';
   const fromEmail = process.env.FROM_EMAIL || 'hbet1988@gmail.com';
   const fromName = process.env.FROM_NAME || 'Victoria Baby Essentials';
 
-  // If the SMTP password is a Brevo API Key (starts with xkeysib-), use the super-reliable Brevo HTTP API
-  if (smtpPass.startsWith('xkeysib-')) {
+  // === PRIMARY PATH: Brevo HTTP API (bypasses SMTP — required on Railway) ===
+  // Use BREVO_API_KEY if set, or fall back to SMTP_PASS if it's an xkeysib- API key
+  const smtpPass = process.env.SMTP_PASS || '';
+  const apiKey = process.env.BREVO_API_KEY ||
+    (smtpPass.startsWith('xkeysib-') ? smtpPass : null);
+
+  if (apiKey) {
     return new Promise((resolve, reject) => {
       const postData = JSON.stringify({
-        sender: {
-          name: fromName,
-          email: fromEmail
-        },
-        to: [
-          {
-            email: options.email
-          }
-        ],
+        sender: { name: fromName, email: fromEmail },
+        to: [{ email: options.email }],
         subject: options.subject,
         htmlContent: options.html
       });
@@ -31,16 +28,14 @@ const sendEmail = async (options) => {
         headers: {
           'accept': 'application/json',
           'content-type': 'application/json',
-          'api-key': smtpPass,
+          'api-key': apiKey,
           'content-length': Buffer.byteLength(postData)
         }
       };
 
       const req = https.request(reqOptions, (res) => {
         let data = '';
-        res.on('data', (chunk) => {
-          data += chunk;
-        });
+        res.on('data', (chunk) => { data += chunk; });
         res.on('end', () => {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             const parsed = JSON.parse(data);
@@ -63,18 +58,17 @@ const sendEmail = async (options) => {
     });
   }
 
-  // Fallback to traditional SMTP
+  // === FALLBACK PATH: Traditional SMTP ===
+  // Note: This may be blocked on Railway. Set BREVO_API_KEY to avoid this.
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
     port: parseInt(process.env.SMTP_PORT) || 587,
-    secure: false, // false for port 587 (STARTTLS), true only for port 465
+    secure: false,
     auth: {
       user: process.env.SMTP_USER || '',
       pass: smtpPass,
     },
-    tls: {
-      rejectUnauthorized: false, // Allow self-signed certs in cloud environments
-    },
+    tls: { rejectUnauthorized: false },
   });
 
   const message = {
@@ -86,6 +80,7 @@ const sendEmail = async (options) => {
 
   const info = await transporter.sendMail(message);
   console.log(`Email sent via SMTP to ${options.email}: ${info.messageId}`);
+
 };
 
 
