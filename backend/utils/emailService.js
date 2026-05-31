@@ -6,10 +6,9 @@ const sendEmail = async (options) => {
   const fromName = process.env.FROM_NAME || 'Victoria Baby Essentials';
 
   // === PRIMARY PATH: Brevo HTTP API (bypasses SMTP — required on Railway) ===
-  // Use BREVO_API_KEY if set, or fall back to SMTP_PASS if it's an xkeysib- API key
+  // Set BREVO_API_KEY in Railway environment variables to enable this path.
   const smtpPass = process.env.SMTP_PASS || '';
-  const apiKey = process.env.BREVO_API_KEY ||
-    (smtpPass.startsWith('xkeysib-') ? smtpPass : null);
+  const apiKey = process.env.BREVO_API_KEY || null;
 
   if (apiKey) {
     return new Promise((resolve, reject) => {
