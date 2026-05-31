@@ -233,6 +233,32 @@ const getAdminOrderAlertTemplate = (order, user) => {
   `;
 };
 
+const getPasswordResetTemplate = (resetUrl) => {
+  return `
+    <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; background: #fafafa; padding: 40px;">
+      <div style="background: white; padding: 50px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #eee;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <span style="display: inline-block; padding: 5px 15px; border: 1px solid #eee; border-radius: 20px; font-size: 0.6rem; letter-spacing: 2px; color: #888; text-transform: uppercase;">Security System</span>
+            <h1 style="color: #1a1a1a; font-size: 2rem; letter-spacing: 1px; margin-top: 15px;">VICTORIA <span style="font-weight: 300; opacity: 0.5;">BABY ESSENTIALS</span></h1>
+        </div>
+        
+        <p style="font-size: 1.1rem; text-align: center; color: #1a1a1a; margin-bottom: 30px;">Reset Your Password</p>
+        <p style="font-size: 0.95rem; color: #666; line-height: 1.6; text-align: center; margin-bottom: 40px;">You are receiving this email because you (or someone else) requested a password reset for your account. Please click the button below to choose a new password. This link is active for 10 minutes.</p>
+        
+        <div style="text-align: center; margin: 40px 0;">
+          <a href="${resetUrl}" style="background: #1a1a1a; color: white; padding: 18px 35px; text-decoration: none; border-radius: 4px; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; display: inline-block;">RESET PASSWORD</a>
+        </div>
+        
+        <p style="font-size: 0.8rem; color: #999; text-align: center; margin-bottom: 40px;">If you did not request a password reset, please ignore this email or contact support if you have concerns.</p>
+
+        <div style="text-align: center; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px;">Victoria Baby Essentials &middot; Security Hub</p>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
 module.exports = {
   sendEmail,
   getOrderEmailTemplate,
