@@ -2,11 +2,15 @@ const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.mailtrap.io',
-    port: process.env.SMTP_PORT || 2525,
+    host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
+    port: parseInt(process.env.SMTP_PORT) || 587,
+    secure: false, // false for port 587 (STARTTLS), true only for port 465
     auth: {
       user: process.env.SMTP_USER || '',
       pass: process.env.SMTP_PASS || '',
+    },
+    tls: {
+      rejectUnauthorized: false, // Allow self-signed certs in cloud environments
     },
   });
 
@@ -17,7 +21,8 @@ const sendEmail = async (options) => {
     html: options.html,
   };
 
-  await transporter.sendMail(message);
+  const info = await transporter.sendMail(message);
+  console.log(`Email sent to ${options.email}: ${info.messageId}`);
 };
 
 // HTML Templates for Emails
