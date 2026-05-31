@@ -8,6 +8,7 @@ const Auth: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +36,7 @@ const Auth: React.FC = () => {
         login(data);
         navigate(redirect);
       } else {
-        const { data } = await axios.post('/api/auth/register', { name, email, password });
+        const { data } = await axios.post('/api/auth/register', { name, email, password, phone });
         login(data);
         navigate(redirect);
       }
@@ -50,6 +51,8 @@ const Auth: React.FC = () => {
     e.preventDefault();
     setMode(mode === 'login' ? 'register' : 'login');
     setError('');
+    setName('');
+    setPhone('');
   };
 
   return (
@@ -70,12 +73,20 @@ const Auth: React.FC = () => {
           {error && <div className="error-banner">{error}</div>}
 
           {mode === 'register' && (
-            <div className="form-group">
-              <label className="form-label">Full Name</label>
-              <input type="text" placeholder="Your full name" required={mode==='register'}
-                value={name} onChange={(e) => setName(e.target.value)}
-                className="form-input" />
-            </div>
+            <>
+              <div className="form-group">
+                <label className="form-label">Full Name</label>
+                <input type="text" placeholder="Your full name" required={mode==='register'}
+                  value={name} onChange={(e) => setName(e.target.value)}
+                  className="form-input" />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Phone Number</label>
+                <input type="tel" placeholder="Your phone number" required={mode==='register'}
+                  value={phone} onChange={(e) => setPhone(e.target.value)}
+                  className="form-input" />
+              </div>
+            </>
           )}
 
           <div className="form-group">

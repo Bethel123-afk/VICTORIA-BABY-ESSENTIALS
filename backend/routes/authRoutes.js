@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
 // @route   POST /api/auth/register
 // @access  Public
 router.post('/register', async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, phone } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -41,6 +41,7 @@ router.post('/register', async (req, res) => {
     name,
     email,
     password,
+    phone,
   });
 
   if (user) {
@@ -49,6 +50,7 @@ router.post('/register', async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      phone: user.phone,
       token: generateToken(user._id),
     });
   } else {

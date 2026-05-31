@@ -5,7 +5,8 @@ const notFound = (req, res, next) => {
 };
 
 const errorHandler = (err, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  // If it's a JSON syntax parsing error, body-parser sets err.status to 400
+  const statusCode = err.status || err.statusCode || (res.statusCode === 200 ? 500 : res.statusCode);
   res.status(statusCode);
   res.json({
     message: err.message,
