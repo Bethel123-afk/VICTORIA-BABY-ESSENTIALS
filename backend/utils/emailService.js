@@ -81,6 +81,35 @@ const getOrderEmailTemplate = (order, type) => {
   `;
 };
 
+const getOtpEmailTemplate = (otpCode) => {
+  return `
+    <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; background: #fafafa; padding: 40px;">
+      <div style="background: white; padding: 50px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #eee;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <span style="display: inline-block; padding: 5px 15px; border: 1px solid #eee; border-radius: 20px; font-size: 0.6rem; letter-spacing: 2px; color: #888; text-transform: uppercase;">Security Registry</span>
+            <h1 style="color: #1a1a1a; font-size: 2rem; letter-spacing: 1px; margin-top: 15px;">VICTORIA <span style="font-weight: 300; opacity: 0.5;">BABY ESSENTIALS</span></h1>
+        </div>
+        
+        <p style="font-size: 1.1rem; text-align: center; color: #1a1a1a; margin-bottom: 30px;">Verification Code Required</p>
+        <p style="font-size: 0.95rem; color: #666; line-height: 1.6; text-align: center; margin-bottom: 40px;">Please enter the following 6-digit secure verification code to complete your registration and activate your account. This code is active for 10 minutes.</p>
+        
+        <div style="text-align: center; margin-bottom: 40px;">
+          <div style="display: inline-block; background: #fafafa; border: 1px solid #eaeaea; border-radius: 12px; padding: 20px 40px; font-size: 2.2rem; font-weight: bold; letter-spacing: 8px; color: #1a1a1a; text-shadow: 1px 1px 0px rgba(0,0,0,0.05);">
+            ${otpCode}
+          </div>
+        </div>
+        
+        <p style="font-size: 0.8rem; color: #999; text-align: center; margin-bottom: 40px;">If you did not request this code, please ignore this email or secure your credentials.</p>
+
+        <div style="text-align: center; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="font-size: 0.75rem; color: #888; font-style: italic;">Thank you for choosing Victoria Baby Essentials.</p>
+            <p style="font-size: 0.6rem; color: #aaa; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px;">Victoria Baby Essentials &middot; Security Hub</p>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
 const getWelcomeEmailTemplate = (name) => {
   return `
     <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333; background: #fafafa; padding: 40px;">
@@ -211,4 +240,5 @@ module.exports = {
   getWelcomeEmailTemplate,
   getAdminRegistrationAlertTemplate,
   getAdminOrderAlertTemplate,
+  getOtpEmailTemplate,
 };

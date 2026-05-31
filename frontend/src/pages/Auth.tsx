@@ -4,14 +4,16 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
 const Auth: React.FC = () => {
-  const [mode, setMode] = useState<'login' | 'register'>('login');
+  const [mode, setMode] = useState<'login' | 'register' | 'otp'>('login');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
+  const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
 
   const { userInfo, login } = useAuth();
 
@@ -37,18 +39,49 @@ const Auth: React.FC = () => {
         const { data } = await axios.post('/api/auth/login', { email, password });
         login(data);
         navigate(redirect);
-      } else {
+      } else if (mode === 'register') {
         await axios.post('/api/auth/register', { name, email, password, phone });
-        setSuccess('Registration successful! Please log in below to access your account.');
-        setMode('login');
+        setSuccess('Verification code sent! Please enter the 6-digit code sent to your email.');
+        setMode('otp');
         setName('');
         setPhone('');
         setPassword('');
+      } else if (mode === 'otp') {
+        const { data } = await axios.post('/api/auth/verify-otp', { email, code: otp });
+        setSuccess('Account activated successfully! Logging you in...');
+        setTimeout(() => {
+          login(data);
+          navigate(redirect);
+        }, 1500);
       }
+    } catch (err: any) {
+      const errMsg = err.response && err.response.data.message ? err.response.data.message : err.message;
+      setError(errMsg);
+      // Auto-toggle to verification state if they try to login with an unverified account
+      if (mode === 'login' && errMsg.toLowerCase().includes('verify your account')) {
+        setMode('otp');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const resendOtpHandler = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (!email) {
+      setError('Please enter your email address first.');
+      return;
+    }
+    setResendLoading(true);
+    setError('');
+    setSuccess('');
+    try {
+      await axios.post('/api/auth/resend-otp', { email });
+      setSuccess('A new verification code has been dispatched to your email.');
     } catch (err: any) {
       setError(err.response && err.response.data.message ? err.response.data.message : err.message);
     } finally {
-      setLoading(false);
+      setResendLoading(false);
     }
   };
 
@@ -59,18 +92,25 @@ const Auth: React.FC = () => {
     setSuccess('');
     setName('');
     setPhone('');
+    setOtp('');
   };
 
   return (
     <main className="container auth-main-container">
       <div className="auth-box reveal-anim stagger-1">
         <div className="auth-header">
-          <span className="item-badge">{mode === 'login' ? 'Login' : 'Register'}</span>
+          <span className="item-badge">
+            {mode === 'login' ? 'Login' : mode === 'register' ? 'Register' : 'Verification'}
+          </span>
           <h1 className="premium-title">
-            {mode === 'login' ? 'Welcome Back' : 'Create Account'}
+            {mode === 'login' ? 'Welcome Back' : mode === 'register' ? 'Create Account' : 'Activate Account'}
           </h1>
           <p className="auth-subtitle">
-            {mode === 'login' ? 'Enter your email and password.' : 'Fill in the details to register.'}
+            {mode === 'login'
+              ? 'Enter your email and password.'
+              : mode === 'register'
+              ? 'Fill in the details to register.'
+              : 'Enter the 6-digit OTP code sent to your email.'}
           </p>
         </div>
 
@@ -110,19 +150,32 @@ const Auth: React.FC = () => {
             </>
           )}
 
-          <div className="form-group">
-            <label className="form-label">Email Address</label>
-            <input type="email" placeholder="your@email.com" required
-              value={email} onChange={(e) => setEmail(e.target.value)}
-              className="form-input" />
-          </div>
+          {mode !== 'otp' ? (
+            <>
+              <div className="form-group">
+                <label className="form-label">Email Address</label>
+                <input type="email" placeholder="your@email.com" required
+                  value={email} onChange={(e) => setEmail(e.target.value)}
+                  className="form-input" />
+              </div>
 
-          <div className="form-group">
-            <label className="form-label">Password</label>
-            <input type="password" placeholder="••••••••" required
-               value={password} onChange={(e) => setPassword(e.target.value)}
-               className="form-input" />
-          </div>
+              <div className="form-group">
+                <label className="form-label">Password</label>
+                <input type="password" placeholder="••••••••" required
+                   value={password} onChange={(e) => setPassword(e.target.value)}
+                   className="form-input" />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="form-group">
+                <label className="form-label">Verification Code (OTP)</label>
+                <input type="text" placeholder="Enter 6-digit code" required={mode==='otp'}
+                  value={otp} onChange={(e) => setOtp(e.target.value)}
+                  className="form-input" maxLength={6} style={{ letterSpacing: '4px', textAlign: 'center', fontSize: '1.2rem', fontWeight: 'bold' }} />
+              </div>
+            </>
+          )}
           
           <div className="form-actions-secondary">
             {mode === 'login' && (
@@ -130,16 +183,36 @@ const Auth: React.FC = () => {
                 Forgot Password?
               </Link>
             )}
+            {mode === 'otp' && (
+              <a href="#" onClick={resendOtpHandler} className="forgot-link" style={{ cursor: resendLoading ? 'not-allowed' : 'pointer' }}>
+                {resendLoading ? 'Resending...' : 'Resend Verification Code?'}
+              </a>
+            )}
           </div>
 
           <button type="submit" className="btn btn-primary submit-btn" disabled={loading}>
-            {loading ? <i className="fas fa-spinner fa-spin"></i> : (mode === 'login' ? 'Login' : 'Register')}
+            {loading ? <i className="fas fa-spinner fa-spin"></i> : (mode === 'login' ? 'Login' : mode === 'register' ? 'Register' : 'Verify & Activate')}
           </button>
 
           <p className="auth-switch">
-            <span>{mode === 'login' ? 'Need an account? ' : 'Already have an account? '}</span>
-            <a href="#" onClick={toggleMode} className="switch-link">
-              {mode === 'login' ? 'Create an account' : 'Sign in here'}
+            <span>
+              {mode === 'otp'
+                ? 'Back to '
+                : mode === 'login'
+                ? 'Need an account? '
+                : 'Already have an account? '}
+            </span>
+            <a href="#" onClick={(e) => {
+              e.preventDefault();
+              if (mode === 'otp') {
+                setMode('register');
+                setError('');
+                setSuccess('');
+              } else {
+                toggleMode(e);
+              }
+            }} className="switch-link">
+              {mode === 'otp' ? 'Register Screen' : mode === 'login' ? 'Create an account' : 'Sign in here'}
             </a>
           </p>
         </form>
