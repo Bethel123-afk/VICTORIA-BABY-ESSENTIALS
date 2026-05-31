@@ -4,3 +4,4 @@
 # Sensitive keys (JWT_SECRET, FLUTTERWAVE keys, MONGO_URI) 
 # are injected securely at runtime only, not baked into the image.
 NODE_ENV = "production"
+NIXPACKS_INSTALL_CMD = "npm ci --omit=dev"
