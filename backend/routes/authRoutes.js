@@ -65,17 +65,28 @@ router.post('/register', async (req, res) => {
   });
 
   if (user) {
-    // Send OTP Verification Email to Customer
-    sendEmail({
-      email: user.email,
-      subject: 'Verify your account - Victoria Baby Essentials',
-      html: getOtpEmailTemplate(otpCode),
-    }).catch(err => console.error('OTP verification email failed:', err));
+    try {
+      // Send OTP Verification Email to Customer (awaited)
+      await sendEmail({
+        email: user.email,
+        subject: 'Verify your account - Victoria Baby Essentials',
+        html: getOtpEmailTemplate(otpCode),
+      });
 
-    res.status(201).json({
-      message: 'Registration successful! Verification code sent to your email.',
-      email: user.email,
-    });
+      res.status(201).json({
+        message: 'Registration successful! Verification code sent to your email.',
+        email: user.email,
+      });
+    } catch (err) {
+      console.error('OTP verification email failed, deleting created user record:', err);
+      
+      // Clean up the created user record so the email address can be tried again
+      await User.deleteOne({ _id: user._id });
+      
+      res.status(500).json({
+        message: `Failed to send verification code: ${err.message || 'Unknown mail server error'}. Please check your email configuration.`
+      });
+    }
   } else {
     res.status(400).json({ message: 'Invalid user data' });
   }
@@ -157,13 +168,21 @@ router.post('/resend-otp', async (req, res) => {
   user.otpExpires = otpExpires;
   await user.save();
 
-  sendEmail({
-    email: user.email,
-    subject: 'Verify your account - Victoria Baby Essentials',
-    html: getOtpEmailTemplate(otpCode),
-  }).catch(err => console.error('OTP resend failed:', err));
+  try {
+    // Send OTP Verification Email to Customer (awaited)
+    await sendEmail({
+      email: user.email,
+      subject: 'Verify your account - Victoria Baby Essentials',
+      html: getOtpEmailTemplate(otpCode),
+    });
 
-  res.status(200).json({ message: 'New verification code sent to your email.' });
+    res.status(200).json({ message: 'New verification code sent to your email.' });
+  } catch (err) {
+    console.error('OTP resend failed:', err);
+    res.status(500).json({
+      message: `Failed to resend verification code: ${err.message || 'Unknown mail server error'}`
+    });
+  }
 });
 
 module.exports = router;
