@@ -1,13 +1,76 @@
 const nodemailer = require('nodemailer');
+const https = require('https');
 
 const sendEmail = async (options) => {
+  const smtpPass = process.env.SMTP_PASS || '';
+  const fromEmail = process.env.FROM_EMAIL || 'hbet1988@gmail.com';
+  const fromName = process.env.FROM_NAME || 'Victoria Baby Essentials';
+
+  // If the SMTP password is a Brevo API Key (starts with xkeysib-), use the super-reliable Brevo HTTP API
+  if (smtpPass.startsWith('xkeysib-')) {
+    return new Promise((resolve, reject) => {
+      const postData = JSON.stringify({
+        sender: {
+          name: fromName,
+          email: fromEmail
+        },
+        to: [
+          {
+            email: options.email
+          }
+        ],
+        subject: options.subject,
+        htmlContent: options.html
+      });
+
+      const reqOptions = {
+        hostname: 'api.brevo.com',
+        port: 443,
+        path: '/v3/smtp/email',
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'content-type': 'application/json',
+          'api-key': smtpPass,
+          'content-length': Buffer.byteLength(postData)
+        }
+      };
+
+      const req = https.request(reqOptions, (res) => {
+        let data = '';
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+        res.on('end', () => {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            const parsed = JSON.parse(data);
+            console.log(`Email sent via Brevo HTTP API to ${options.email}: ${parsed.messageId}`);
+            resolve(parsed);
+          } else {
+            console.error(`Brevo API failed with status ${res.statusCode}: ${data}`);
+            reject(new Error(`Brevo API status ${res.statusCode}: ${data}`));
+          }
+        });
+      });
+
+      req.on('error', (e) => {
+        console.error('Brevo API request error:', e);
+        reject(e);
+      });
+
+      req.write(postData);
+      req.end();
+    });
+  }
+
+  // Fallback to traditional SMTP
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
     port: parseInt(process.env.SMTP_PORT) || 587,
     secure: false, // false for port 587 (STARTTLS), true only for port 465
     auth: {
       user: process.env.SMTP_USER || '',
-      pass: process.env.SMTP_PASS || '',
+      pass: smtpPass,
     },
     tls: {
       rejectUnauthorized: false, // Allow self-signed certs in cloud environments
@@ -15,15 +78,16 @@ const sendEmail = async (options) => {
   });
 
   const message = {
-    from: `${process.env.FROM_NAME || 'Victoria Baby Essentials'} <${process.env.FROM_EMAIL || 'no-reply@victoriababy.com'}>`,
+    from: `${fromName} <${fromEmail}>`,
     to: options.email,
     subject: options.subject,
     html: options.html,
   };
 
   const info = await transporter.sendMail(message);
-  console.log(`Email sent to ${options.email}: ${info.messageId}`);
+  console.log(`Email sent via SMTP to ${options.email}: ${info.messageId}`);
 };
+
 
 // HTML Templates for Emails
 const getOrderEmailTemplate = (order, type) => {
