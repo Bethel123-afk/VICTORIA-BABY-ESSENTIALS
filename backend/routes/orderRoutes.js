@@ -67,7 +67,12 @@ router.get('/:id', protect, async (req, res) => {
     );
 
     if (order) {
-      res.json(order);
+      // Gate: Check if user is admin or the order belongs to them
+      if (req.user.isAdmin || order.user._id.toString() === req.user._id.toString()) {
+        res.json(order);
+      } else {
+        res.status(401).json({ message: 'Not authorized to view this order' });
+      }
     } else {
       res.status(404).json({ message: 'Order not found' });
     }
@@ -84,6 +89,11 @@ router.put('/:id/pay', protect, async (req, res) => {
     const order = await Order.findById(req.params.id);
 
     if (order) {
+      // Gate: Check if user is admin or the order belongs to them
+      if (!req.user.isAdmin && order.user.toString() !== req.user._id.toString()) {
+        return res.status(401).json({ message: 'Not authorized to update this order' });
+      }
+
       order.isPaid = true;
       order.paidAt = Date.now();
       order.paymentResult = {
