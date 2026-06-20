@@ -325,7 +325,6 @@ const getPasswordResetTemplate = (resetUrl) => {
 module.exports = {
   sendEmail,
   getOrderEmailTemplate,
-  getPasswordResetTemplate,
   getWelcomeEmailTemplate,
   getAdminRegistrationAlertTemplate,
   getAdminOrderAlertTemplate,
